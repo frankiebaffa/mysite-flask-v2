@@ -76,3 +76,7 @@ p, a, span {
 .text-right {
   text-align: right;
 }
+.flash {
+  font-family: Montserrat;
+  color: red;
+}
