@@ -1,0 +1,23 @@
+/*==============================================================
+ * THIS FILE CONTAINS THE STYLING FOR VISUAL SUCH AS
+ * TRANSITION TIME, ETC FOR FRANKIEBAFFA.COM
+ * ===========================================================*/
+a {
+  text-decoration: none !important;
+}
+
+.tran-fast {
+  transition: 0.2s !important;
+}
+
+.tran-med {
+  transition: 0.4s !important;
+}
+
+.tran-slow {
+  transition: 0.6s !important;
+}
+
+body {
+  background-color: var(--lightest);
+}

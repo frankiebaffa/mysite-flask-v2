@@ -1,0 +1,138 @@
+/*==============================================================
+ *  THIS FILE CONTAINS ALL OF THE STYLING CLASSES FOR THE COLOR
+ *  SCHEME OF FRANKIEBAFFA.COM
+ * ===========================================================*/
+
+:root {
+/* Monochrome
+  --darkest: #000000;
+  --darker: #323232;
+  --dark: #666666;
+  --light: #999999;
+  --lighter: #cccccc;
+  --lightest: #ffffff;
+*/
+/* Gruvbox-Light
+  --darkest: #7c6f64;  gray
+  --darker: #b16286;  purple 
+  --dark: #cc241d;  red 
+  --light: #458588;  blue 
+  --lighter: #689d6a;  aqua 
+  --lightest: #fbf1c7;  tan 
+*/
+/* Gruvbox-Dark */
+  --darkest: #282828; /* gray */
+  --darker: #504945;
+  --dark: #dbae93;
+  --light: #928374;
+  --lighter: #ebdbb2;
+  --lightest: #fbf1c7;
+}
+
+.bg-lightest {
+  background-color: var(--lightest) !important;
+}
+
+.bg-lighter {
+  background-color: var(--lighter) !important;
+}
+
+.bg-light {
+  background-color: var(--light) !important;
+}
+
+.bg-dark {
+  background-color: var(--dark) !important;
+}
+
+.bg-darker {
+  background-color: var(--darker) !important;
+}
+
+.bg-darkest {
+  background-color: var(--darkest) !important;
+}
+
+.fg-lightest {
+  color: var(--lightest) !important;
+}
+
+.fg-lighter {
+  color: var(--lighter) !important;
+}
+
+.fg-light {
+  color: var(--light) !important;
+}
+
+.fg-dark {
+  color: var(--dark) !important;
+}
+
+.fg-darker {
+  color: var(--darker) !important;
+}
+
+.fg-darkest {
+  color: var(--darkest) !important;
+}
+
+.hover-bg-lightest:hover {
+  background-color: var(--lightest) !important;  
+}
+
+.hover-bg-lighter:hover {
+  background-color: var(--lighter) !important; 
+}
+
+.hover-bg-light:hover {
+  background-color: var(--light) !important; 
+}
+
+.hover-bg-dark:hover {
+  background-color: var(--dark) !important; 
+}
+
+.hover-bg-darker:hover {
+  background-color: var(--darker) !important; 
+}
+
+.hover-bg-darkest:hover {
+  background-color: var(--darkest) !important; 
+}
+
+.hover-fg-lightest:hover {
+  color: var(--lightest) !important; 
+}
+
+.hover-fg-lighter:hover {
+  color: var(--lighter) !important; 
+}
+
+.hover-fg-light:hover {
+  color: var(--light) !important; 
+}
+
+.hover-fg-dark:hover {
+  color: var(--dark) !important; 
+}
+
+.hover-fg-darker:hover {
+  color: var(--darker) !important; 
+}
+
+.hover-fg-darkest:hover {
+  color: var(--darkest) !important; 
+}
+
+.tilt-border-lightest {
+  border-style: solid;
+  border-color: var(--lightest);
+  border-width: 5px;
+}
+
+.tilt-border-darkest {
+  border-style: solid;
+  border-color: var(--darkest);
+  border-width: 5px;
+}

@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "Merriweather";
+  src: url("/static/font/merriweather/Merriweather-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/static/font/merriweather/Merriweather-Italic.otf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/static/font/merriweather/Merriweather-Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/static/font/merriweather/Merriweather-BoldItalic.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/static/font/montserrat/Montserrat-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/static/font/montserrat/Montserrat-Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/static/montserrat/Montserrat-Italic.otf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/static/montserrat/Montserrat-BoldItalic.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: "Montserrat";
+}
+
+p, a, span {
+  font-family: "Merriweather";
+}

@@ -1,0 +1,59 @@
+.tilt-square {
+  display: block;
+  transform-style: preserve-3d;
+  margin: 0 10px 10px 0px;
+}
+.header-square {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 200px;
+  max-width: 200px;
+  height: 170px;
+}
+.main-header {
+  margin: 0px 0px 10px 0px;
+  text-align: center;
+  transform: translateZ(20px); 
+}
+.sub-header {
+  text-align: center;
+  transform: translateZ(20px);
+}
+.icon-square {
+  padding: 3px 8px;
+  min-width: 200px;
+  max-width: 200px;
+}
+.social-icon {
+  text-align: center; 
+  font-size: 50px;
+  transform: translateZ(20px);
+}
+.tools-square {
+  min-width: 200px;
+  max-width: 200px;
+  text-align: center;
+}
+.jumbotron {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.jumbotron-header {
+  margin: -35px 0px 10px 0px;
+}
+.jumbotron-p {
+  margin-bottom: 0px;
+}
+.read-more {
+  margin-top: -60px;
+}
+
+/* ================= *
+ * MEDIA BREAKPOINTS *
+ * ================= */
+@media (max-width: 575px) {
+    .jumbotron-header {
+        margin: 0px 0 10px 0px;
+    }
+}
