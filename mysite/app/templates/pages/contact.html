@@ -1,0 +1,21 @@
+{% extends 'templates/base.html' %}
+
+{% block style %}
+{{ super() }}
+{{ style('formstyle.css') }}
+{% endblock style %}
+
+{% block content %}
+<h1 class="main-header fg-darkest text-center">Contact</h1>
+<div class="row">
+  <div class="col">
+    <div class="form-container bg-lighter tilt-border-darkest">
+      {% include 'sections/contactform.html' %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{{ super() }}
+{% endblock script %}
