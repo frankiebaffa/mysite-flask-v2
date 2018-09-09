@@ -58,3 +58,20 @@ class Blog(db.Model):
     # When called, db object will print as 'Blog title'
     def __repr__(self):
         return '<Blog {}>'.format(self.title)
+
+# Create a database model for projects
+class Project(db.Model):
+    # Column id, type integer, primary key
+    id = db.Column(db.Integer, primary_key=True)
+    # Column title, type string(100)
+    title = db.Column(db.String(100))
+    # Column body, type string (1000)
+    body = db.Column(db.String(1000))
+    # Column url, type string(100)
+    url = db.Column(db.String(100))
+    # Column repo, type string(100)
+    repo = db.Column(db.String(100))
+    # Column timestamp, type datetime
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    # Column user_id, type integer, foreign key from User.id
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
