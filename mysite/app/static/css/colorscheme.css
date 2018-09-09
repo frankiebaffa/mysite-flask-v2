@@ -4,14 +4,14 @@
  * ===========================================================*/
 
 :root {
-/* Monochrome
+/* Monochrome */
   --darkest: #000000;
   --darker: #323232;
   --dark: #666666;
   --light: #999999;
   --lighter: #cccccc;
   --lightest: #ffffff;
-*/
+
 /* Gruvbox-Light
   --darkest: #7c6f64;  gray
   --darker: #b16286;  purple 
@@ -20,13 +20,14 @@
   --lighter: #689d6a;  aqua 
   --lightest: #fbf1c7;  tan 
 */
-/* Gruvbox-Dark */
-  --darkest: #282828; /* gray */
+/* Gruvbox-Dark
+  --darkest: #282828;
   --darker: #504945;
   --dark: #dbae93;
   --light: #928374;
   --lighter: #ebdbb2;
   --lightest: #fbf1c7;
+*/
 }
 
 .bg-lightest {
@@ -135,4 +136,52 @@
   border-style: solid;
   border-color: var(--darkest);
   border-width: 5px;
+}
+
+.active-bg-lightest:active {
+  background-color: var(--lightest) !important;
+}
+
+.active-bg-lighter:active {
+  background-color: var(--lighter) !important;
+}
+
+.active-bg-light:active {
+  background-color: var(--light) !important;
+}
+
+.active-bg-dark:active {
+  background-color: var(--dark) !important;
+}
+
+.active-bg-darker:active {
+  background-color: var(--darker) !important;
+}
+
+.active-bg-darkest:active {
+  background-color: var(--darkest) !important;
+}
+
+.active-fg-lightest:active {
+  color: var(--lightest) !important;
+}
+
+.active-fg-lighter:active {
+  color: var(--lighter) !important;
+}
+
+.active-fg-light:active {
+  color: var(--light) !important;
+}
+
+.active-fg-dark:active {
+  color: var(--dark) !important;
+}
+
+.active-fg-darker:active {
+  color: var(--darker) !important;
+}
+
+.active-fg-darkest:active {
+  color: var(--darkest) !important;
 }
