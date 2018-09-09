@@ -21,3 +21,9 @@ a {
 body {
   background-color: var(--lightest);
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
