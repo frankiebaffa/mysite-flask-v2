@@ -8,7 +8,7 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, login_required
 from flask_login import logout_user
 # from models import User for login query
-from app.models import User
+from app.models import User, Blog, Project
 # get forms from app/forms.py
 from app.forms import LoginForm, ContactForm
 # get flask_mail for contact form
@@ -21,8 +21,9 @@ import feedparser
 @app.route('/index')
 # define function 'index'
 def index():
+    blogs = Blog.query.limit(10).all()
     # return template at 'pages/index.html'
-    return render_template('pages/index.html')
+    return render_template('pages/index.html', blogs=blogs)
 
 # create route 'news' at '/news'
 @app.route('/news')
@@ -61,8 +62,8 @@ def contact():
             message = 'All fields are required.'
             return render_template('pages/contact.html', form=form, message=message)
         else:
-            msg = Message(form.subject.data, sender='frankiebaffa.com@gmail.com',
-                recipients=['frankiebaffa@gmail.com'])
+            msg = Message(form.subject.data, sender=app.config['MAIL_USERNAME'],
+                recipients=[app.config['CONTACT_EMAIL']])
             msg.body = """
             From: {} <{}>
 
@@ -70,7 +71,7 @@ def contact():
             """.format(form.name.data, form.email.data, form.body.data)
             mail.send(msg)
             message = 'Your message has been sent!'
-            return render_template('pages/contact.html', form=form, message=message)
+            return redirect(url_for('contact'))
     elif request.method == 'GET':
         message = ''
         return render_template('pages/contact.html', form=form, message=message)
