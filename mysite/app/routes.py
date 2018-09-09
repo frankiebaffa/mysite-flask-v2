@@ -1,7 +1,7 @@
 # import application initialization
 from app import app
 # render_template for using Jinja2 templates
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 # get flask_login modules current_user and login_user
 # also get flask_login module login_required to make sure
 #   that login is validated before specific pages are accessed
@@ -10,7 +10,9 @@ from flask_login import logout_user
 # from models import User for login query
 from app.models import User
 # get forms from app/forms.py
-from app.forms import LoginForm
+from app.forms import LoginForm, ContactForm
+# get flask_mail for contact form
+from flask_mail import Message, Mail
 # feedparser for handling .rss feeds
 import feedparser
 
@@ -48,6 +50,31 @@ def login():
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
     return render_template('pages/login.html', title='Sign In', form=form)
+
+# create route to contact method
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    mail = Mail()
+    form = ContactForm()
+    if request.method == 'POST':
+        if form.validate() == False:
+            message = 'All fields are required.'
+            return render_template('pages/contact.html', form=form, message=message)
+        else:
+            msg = Message(form.subject.data, sender='frankiebaffa.com@gmail.com',
+                recipients=['frankiebaffa@gmail.com'])
+            msg.body = """
+            From: {} <{}>
+
+            {}
+            """.format(form.name.data, form.email.data, form.body.data)
+            mail.send(msg)
+            message = 'Your message has been sent!'
+            return render_template('pages/contact.html', form=form, message=message)
+    elif request.method == 'GET':
+        message = ''
+        return render_template('pages/contact.html', form=form, message=message)
+
 
 # create route to logout method
 # only allow if user is logged in
