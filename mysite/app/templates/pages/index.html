@@ -8,35 +8,33 @@
 {% endblock style %}
 
 {% block content %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="jumbotron bg-darker tilt-border-darkest">
-      <h1 class="main-header jumbotron-header fg-lighter text-center">Projects</h1>
-      {# for item in projects #}
-      {# set counter = 0 #}
-      {# increment counter #}
-      <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
-      <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
-      {# endfor #}
-    </div>
-    <div class="jumbotron bg-darker tilt-border-darkest">
-      <h1 class="main-header jumbotron-header fg-lighter text-center">Blog</h1>
-      {# for item in blog #}
-      {# set counter = 0 #}
-      {# increment counter #}
-      <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
-      <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
-      {# endfor #}
-    </div>
-    <div class="jumbotron bg-darker tilt-border-darkest">
-      <h1 class="main-header jumbotron-header fg-lighter text-center">Articles</h1>
-      {# for item in articles #}
-      {# set counter = 0 #}
-      {# increment counter #}
-      <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
-      <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
-      {# endfor #}
-    </div>
+<div class="row">
+  <div class="jumbotron bg-darker tilt-border-darkest">
+    <h1 class="main-header jumbotron-header fg-lighter text-center">Projects</h1>
+    {# for item in projects #}
+    {# set counter = 0 #}
+    {# increment counter #}
+    <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
+    {# endfor #}
+  </div>
+  <div class="jumbotron bg-darker tilt-border-darkest">
+    <h1 class="main-header jumbotron-header fg-lighter text-center">Blog</h1>
+    {# for item in blog #}
+    {# set counter = 0 #}
+    {# increment counter #}
+    <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
+    {# endfor #}
+  </div>
+  <div class="jumbotron bg-darker tilt-border-darkest">
+    <h1 class="main-header jumbotron-header fg-lighter text-center">Articles</h1>
+    {# for item in articles #}
+    {# set counter = 0 #}
+    {# increment counter #}
+    <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
+    {# endfor #}
   </div>
 </div>
 {% endblock content %}
