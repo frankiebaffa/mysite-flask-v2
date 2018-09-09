@@ -41,7 +41,7 @@
       {{ navitem('#projects', "Projects") }}
       {{ navitem('#blog', "Blog") }}
       {{ navitem('#about', "About") }}
-      {{ navitem('#contact', "Contact") }}
+      {{ navitem(url_for('contact'), "Contact") }}
       {% if not current_user.is_anonymous %}
       {# navitem(url_for('manage'), "Manage") #}
       {{ navitem(url_for('logout'), "Logout") }}
