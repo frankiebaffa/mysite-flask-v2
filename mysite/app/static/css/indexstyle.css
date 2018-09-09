@@ -10,15 +10,6 @@
   max-width: 200px;
   height: 170px;
 }
-.main-header {
-  margin: 0px 0px 10px 0px;
-  text-align: center;
-  transform: translateZ(20px); 
-}
-.sub-header {
-  text-align: center;
-  transform: translateZ(20px);
-}
 .icon-square {
   padding: 3px 8px;
   min-width: 200px;

@@ -46,19 +46,33 @@
   font-weight: normal;
   font-style: italic;
 }
-
 @font-face {
   font-family: "Montserrat";
   src: url("/static/montserrat/Montserrat-BoldItalic.otf");
   font-weight: bold;
   font-style: italic;
 }
-
 h1, h2, h3,
 h4, h5, h6 {
   font-family: "Montserrat";
 }
-
 p, a, span {
   font-family: "Merriweather";
+}
+.main-header {
+  margin: 0px 0px 10px 0px;
+  transform: translateZ(20px); 
+}
+.sub-header {
+  text-align: center;
+  transform: translateZ(20px);
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
 }
