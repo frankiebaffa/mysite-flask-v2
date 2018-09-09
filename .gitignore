@@ -4,4 +4,4 @@
 local_settings.py
 .flaskenv
 shellContext.py
-
+**/migrations
