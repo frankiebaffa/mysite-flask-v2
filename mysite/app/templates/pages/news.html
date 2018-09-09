@@ -1,0 +1,27 @@
+{% extends 'templates/base.html' %}
+
+{% set placeholder = "Vaporware everyday carry forage normcore, dreamcatcher jianbing pop-up palo santo YOLO distillery air plant cray mustache. Fanny pack tumblr subway tile you probably haven't heard of them polaroid dreamcatcher kale chips lumbersexual sriracha photo booth. Prism kale chips ennui semiotics occupy thundercats vinyl before they sold out polaroid tousled pitchfork lumbersexual fingerstache. Jianbing DIY vexillologist cloud bread intelligentsia, roof party before they sold out photo booth." %}
+
+{% block style %}
+{{ super() }}
+{{ style('newsstyle.css') }}
+{% endblock style %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="jumbotron bg-dark tilt-border-darkest">
+        <h1 class="main-header jumbotron-header fg-lightest">{{ feed.feed.title }}</h1>
+        {% for item in feed.entries %}
+        {# set counter = 0 #}
+        {# increment counter #}
+        <div class="jumbotron-p-container ellipsis multiline">
+          <a class="news" href="{{ item.link }}" target="_blank"><p class="jumbotron-p fg-lighter hover-fg-darker tran-fast">{{ item.title }}</p></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

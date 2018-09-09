@@ -1,0 +1,58 @@
+{% macro navitem(href, text) -%}
+  <li class="nav-item active">
+    <a class="nav-link fg-lightest bg-darkest hover-bg-darkest hover-fg-dark tran-fast" href="{{ href }}">{{ text }} <span class="sr-only">(current)</span></a>
+  </li>
+{%- endmacro %}
+
+{% macro navdrop(href, text, links) %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle fg-lightest bg-darkest hover-bg-darkest hover-fg-dark tran-fast" href="{{ href }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ text }}
+    </a>
+    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+    {% for key, value in links %}
+      <a class="dropdown-item fg-lighter hover-bg-dark hover-fg-darkest tran-fast" href="{{ key }}">{{ value }}</a>
+    {% endfor %}
+    </div>
+  </li>
+{%- endmacro %}
+
+{% macro navdivide() -%}
+  <div class="dropdown-divider"></div>
+{%- endmacro %}
+
+{% macro navdisabled(href, text) -%}
+  <li class="nav item">
+    <a class="nav-link disabled" href="{{ href }}">{{ text }}</a>
+  </li>
+{%- endmacro %}
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-darkest">
+  <a class="navbar-brand fg-lightest hover-bg-darkest tran-fast hover-fg-dark" href="#">
+      F. Baffa
+  </a>
+  <button class="navbar-toggler fg-lightest hover-bg-darkest hover-fg-lighter tran-fast" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {{ navitem(url_for('index'), "Home") }}
+      {{ navitem('#projects', "Projects") }}
+      {{ navitem('#blog', "Blog") }}
+      {{ navitem('#about', "About") }}
+      {{ navitem('#contact', "Contact") }}
+      {% if not current_user.is_anonymous %}
+      {# navitem(url_for('manage'), "Manage") #}
+      {{ navitem(url_for('logout'), "Logout") }}
+      {% endif %}
+
+      {# EXAMPLE OF NAV DROPDOWN MACRO
+      {% set navdropdown = [(url_for('index'), 'Drop 1'), ('https://soundcloud.com', 'Soundcloud')] %}
+      {{ navdrop("#", "Dropdown", navdropdown) }}
+      #}
+
+    </ul>
+  </div>
+</nav>
+<div class="nav-spacer"></div>

@@ -1,0 +1,44 @@
+{% macro style(href) -%}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/') + href }}">
+{%- endmacro %}
+
+{% macro script(src) -%}
+  <script src="{{ url_for('static', filename='js/') + src }}"></script>
+{%- endmacro %}
+
+<! doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+    {% endblock head %}
+
+    {% block meta %}
+      <meta charset="utf-8">
+    {% endblock meta %}
+
+    {% block title %} 
+    {% endblock title %}
+
+    {% block style %}
+    {% endblock style %}
+  </head>
+
+  {% block nav %}
+  {% endblock nav %}
+
+  <body>
+    {% block body %}
+    {% endblock body %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block script %}
+    {% endblock script %}
+  </body>
+
+  <footer>
+    {% block foot %}    
+    {% endblock foot %}
+  </footer>
+</html>

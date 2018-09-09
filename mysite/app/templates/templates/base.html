@@ -1,0 +1,49 @@
+{% extends 'templates/bootstrap.html' %}
+
+{% block head %}
+{{ super() }}
+{% endblock head %}
+
+{% block title %}
+{{ super() }}
+<title>Frankie Baffa</title>
+{% endblock title %}
+
+{% block meta %}
+{{ super() }}
+{% endblock meta %}
+
+{% block style %}
+{{ super() }}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+{{ style('colorscheme.css') }}
+{{ style('visualstyle.css') }}
+{{ style('fontstyle.css') }}
+{{ style('navstyle.css') }}
+{% endblock style %}
+
+{% block nav %}
+{{ super() }}
+{% include 'sections/navigation.html' %}
+{% endblock nav %}
+
+{% block body %}
+{{ super() }}
+{% endblock body %}
+
+{% block content %}
+{{ super() }}
+{% endblock content %}
+
+{% block foot %}
+{{ super() }}
+{% endblock foot %}
+
+{% block script %}
+{{ super() }}
+{{ script('tilt.jquery.min.js') }}
+{{ script('jquery.ellipsis.js') }}
+{% endblock script %}
+

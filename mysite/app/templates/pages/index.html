@@ -1,0 +1,46 @@
+{% extends 'templates/base.html' %}
+
+{% set placeholder = "Vaporware everyday carry forage normcore, dreamcatcher jianbing pop-up palo santo YOLO distillery air plant cray mustache. Fanny pack tumblr subway tile you probably haven't heard of them polaroid dreamcatcher kale chips lumbersexual sriracha photo booth. Prism kale chips ennui semiotics occupy thundercats vinyl before they sold out polaroid tousled pitchfork lumbersexual fingerstache. Jianbing DIY vexillologist cloud bread intelligentsia, roof party before they sold out photo booth." %}
+
+{% block style %}
+{{ super() }}
+{{ style('indexstyle.css') }}
+{% endblock style %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="jumbotron bg-darker tilt-border-darkest">
+      <h1 class="main-header jumbotron-header fg-lighter">Projects</h1>
+      {# for item in projects #}
+      {# set counter = 0 #}
+      {# increment counter #}
+      <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
+      <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
+      {# endfor #}
+    </div>
+    <div class="jumbotron bg-darker tilt-border-darkest">
+      <h1 class="main-header jumbotron-header fg-lighter">Blog</h1>
+      {# for item in blog #}
+      {# set counter = 0 #}
+      {# increment counter #}
+      <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
+      <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
+      {# endfor #}
+    </div>
+    <div class="jumbotron bg-darker tilt-border-darkest">
+      <h1 class="main-header jumbotron-header fg-lighter">Articles</h1>
+      {# for item in articles #}
+      {# set counter = 0 #}
+      {# increment counter #}
+      <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
+      <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
+      {# endfor #}
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{{ super() }}
+{% endblock script %}
