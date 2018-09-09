@@ -39,6 +39,16 @@
 .read-more {
   margin-top: -60px;
 }
+.jumbotron-sub-header {
+  font-size: 26px;
+}
+.jumbotron-item {
+  display: block;
+  margin: 25px auto -30px auto;
+}
+.jumbotron-link {
+  border: none;
+}
 
 /* ================= *
  * MEDIA BREAKPOINTS *
