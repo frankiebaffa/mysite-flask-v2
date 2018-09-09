@@ -11,8 +11,6 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 # Import Mail from flask_mail
 from flask_mail import Mail
-# get local_settings
-import local_settings
 
 # set application name as name
 app = Flask(__name__)
