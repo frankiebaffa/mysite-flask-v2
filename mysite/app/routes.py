@@ -10,7 +10,7 @@ from flask_login import logout_user
 # from models import User for login query
 from app.models import User, Blog, Project
 # get forms from app/forms.py
-from app.forms import LoginForm, ContactForm
+from app.forms import LoginForm, ContactForm, ContentForm
 # get flask_mail for contact form
 from flask_mail import Message, Mail
 # feedparser for handling .rss feeds
@@ -22,14 +22,23 @@ import feedparser
 # define function 'index'
 def index():
     projects = Project.query.limit(10).all()
-    blogs = Blog.query.limit(10).all()
+    blog = Blog.query.limit(10).all()
+    pagetype = "top"
     # return template at 'pages/index.html'
-    return render_template('pages/index.html', projects=projects, blogs=blogs)
+    return render_template('pages/index.html', projects=projects, blog=blog, pagetype=pagetype)
 
 @app.route('/blog/<post>', methods=['GET'])
 def blogpost(post):
-    blogpost = Blog.query.filter(Blog.id == post).first()
-    return render_template("pages/blogpost.html", blogpost=blogpost)
+    blog = Blog.query.filter(Blog.id == post).first()
+    pagetype = "single"
+    back = url_for('blog') + '#blog-container-' + str(post)
+    return render_template("pages/blogpost.html", blog=blog, pagetype=pagetype, back=back)
+
+@app.route('/blog')
+def blog():
+    blog = Blog.query.all()
+    pagetype = "all"
+    return render_template("pages/blog.html", blog=blog, pagetype=pagetype)
 
 @app.route('/project/<post>', methods=['GET'])
 def projectpost(post):
@@ -37,14 +46,14 @@ def projectpost(post):
     return render_template("pages/projectpost.html", projectpost=projectpost)
 
 
-# create route 'news' at '/news'
-@app.route('/news')
-# define function news
-def news():
-    # define variable feed as feedparser reddit.com/r/worldnews
-    feed = feedparser.parse('http://reddit.com/r/worldnews.rss')
-    # return template at 'pages/news.html' and 'feed'
-    return render_template('pages/news.html', feed=feed)
+## create route 'news' at '/news'
+#@app.route('/news')
+## define function news
+#def news():
+#    # define variable feed as feedparser reddit.com/r/worldnews
+#    feed = feedparser.parse('http://reddit.com/r/worldnews.rss')
+#    # return template at 'pages/news.html' and 'feed'
+#    return render_template('pages/news.html', feed=feed)
 
 # create route to login page at '/login'
 # if user is already authenticated, forward to '/manage'
@@ -88,6 +97,22 @@ def contact():
         message = ''
         return render_template('pages/contact.html', form=form, message=message)
 
+#=======================================#
+#       All below methods must          #
+#          @login_required              #
+#=======================================#
+
+# create route to manage method
+# only allow if user is logged in
+@app.route('/manage')
+@login_required
+def manage():
+    projects = Project.query.all()
+    blogs = Blog.query.all()
+    articles = Article.query.all()
+    content = [projects, blogs, articles]
+
+    return render_template('pages/manage.html', content=content)
 
 # create route to logout method
 # only allow if user is logged in
