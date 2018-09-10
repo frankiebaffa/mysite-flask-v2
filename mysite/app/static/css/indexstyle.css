@@ -43,7 +43,7 @@
   font-size: 20px;
 }
 .jumbotron-link {
-  border: none;
+  border-color: var(--lightest);
 }
 .pagination {
   margin: 0px 0 10px 0;
