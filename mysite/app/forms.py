@@ -20,3 +20,12 @@ class ContactForm(FlaskForm):
     subject = StringField('Subject', validators=[DataRequired()])
     body = TextAreaField('Message', validators=[DataRequired()])
     submit = SubmitField('Send')
+
+class ContentForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    body = TextAreaField('Body', validators=[DataRequired()])
+    url = StringField('Content URL', validators=[DataRequired()])
+    repo = StringField('Repository URL', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+    delete = SubmitField('Delete')
+    edit = SubmitField('Edit')
