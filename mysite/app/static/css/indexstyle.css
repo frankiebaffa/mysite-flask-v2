@@ -40,14 +40,18 @@
   margin-top: -60px;
 }
 .jumbotron-sub-header {
-  font-size: 26px;
-}
-.jumbotron-item {
-  display: block;
-  margin: 25px auto -30px auto;
+  font-size: 20px;
 }
 .jumbotron-link {
   border: none;
+}
+.pagination {
+  margin: 20px 0 0 0;
+}
+.blog-container,
+.project-container,
+.article-container {
+  display: none;
 }
 
 /* ================= *
