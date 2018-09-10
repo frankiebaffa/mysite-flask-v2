@@ -1,23 +1,26 @@
-<form action="" method="post" novalidate>
-  {{ form.hidden_tag() }}
-  {% if message != '' %}
-  <p class="flash text-center">{{ message }}</p>
-  {% endif %}
-  <div class="form-group">
-    {{ form.name.label(for="inputName", class_="fg-lighter") }}<br>
-    {{ form.name(class_="form-control bg-lighter fg-darkest", id="inputName", placeholder="Name") }}
-  </div>
-  <div class="form-group">
-    {{ form.email.label(for="inputEmail", class_="fg-lighter") }}<br>
-    {{ form.email(class_="form-control bg-lighter fg-darkest", id="inputEmail", placeholder="Email Address") }}
-  </div>
-  <div class="form-group">
-    {{ form.subject.label(for="inputSubject", class_="fg-lighter") }}<br>
-    {{ form.subject(class_="form-control bg-lighter fg-darkest", id="inputSubject", placeholder="Subject") }}
-  </div>
-  <div class="form-group">
-    {{ form.body.label(for="inputBody", class_="fg-lighter") }}<br>
-    {{ form.body(class_="form-control bg-lighter fg-darkest", id="inputBody", placeholder="Message") }}
-  </div>
-  {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest tran-fast") }}
-</form>
+<div class="form-container bg-darker tilt-border-darkest">
+  <h1 class="main-header fg-lightest text-center">Contact</h1>
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {% if message != '' %}
+    <p class="flash text-center">{{ message }}</p>
+    {% endif %}
+    <div class="form-group">
+      {{ form.name.label(for="inputName", class_="fg-lighter") }}<br>
+      {{ form.name(class_="form-control bg-lighter fg-darkest", id="inputName", placeholder="Name") }}
+    </div>
+    <div class="form-group">
+      {{ form.email.label(for="inputEmail", class_="fg-lighter") }}<br>
+      {{ form.email(class_="form-control bg-lighter fg-darkest", id="inputEmail", placeholder="Email Address") }}
+    </div>
+    <div class="form-group">
+      {{ form.subject.label(for="inputSubject", class_="fg-lighter") }}<br>
+      {{ form.subject(class_="form-control bg-lighter fg-darkest", id="inputSubject", placeholder="Subject") }}
+    </div>
+    <div class="form-group">
+      {{ form.body.label(for="inputBody", class_="fg-lighter") }}<br>
+      {{ form.body(class_="form-control bg-lighter fg-darkest", id="inputBody", placeholder="Message") }}
+    </div>
+    {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest tran-fast") }}
+  </form>
+</div>
