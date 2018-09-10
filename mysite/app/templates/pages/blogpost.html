@@ -1,9 +1,22 @@
 {% extends 'templates/base.html' %}
 
+{% block style %}
+{{ super() }}
+{{ style('indexstyle.css') }}
+{{ style('jumbotronstyle.css') }}
+{% endblock style %}
+
+{% block content %}
+  <div class="row">
+    {% include 'sections/blogotron.html' %}
+  </div>
+{% endblock content %}
+
+{#
 {% block content %}
 <p class="fg-darkest">
   {{ blogpost.title }}<br>
   {{ blogpost.timestamp|datetime('full') }}<br>
   {{ blogpost.body }}<br>
 </p>
-{% endblock content %}
+{% endblock content %}#}
