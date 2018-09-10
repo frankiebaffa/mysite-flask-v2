@@ -22,6 +22,10 @@ body {
   background-color: var(--lightest);
 }
 
+.container-fluid {
+  background-color: var(--lightest);
+}
+
 .center {
   display: block;
   margin-left: auto;
