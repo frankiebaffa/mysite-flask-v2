@@ -1,5 +1,7 @@
 # flask modules
 from flask import Flask
+# import babel
+import babel
 # get configuration from Config
 from config import Config
 from mail import MailConfig
@@ -28,6 +30,17 @@ MailConfig(app)
 
 mail = Mail()
 mail.init_app(app)
+
+# create a jinja filter for datetime
+def format_datetime(value, format='medium'):
+    if format == 'full':
+        format="EEEE, MMM d, y 'at' HH:mm"
+    elif format == 'medium':
+        format="EE dd.MM.y HH:mm"
+    return babel.dates.format_datetime(value, format)
+
+app.jinja_env.filters['datetime'] = format_datetime
+
 
 # get routes for application
 from app import routes, models
