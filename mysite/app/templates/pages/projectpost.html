@@ -1,0 +1,11 @@
+{% extends 'templates/base.html' %}
+
+{% block content %}
+<p class="fg-darkest">
+  {{ projectpost.title }}<br>
+  {{ projectpost.timestamp|datetime('full') }}<br>
+  <a href="{{ project.repo }}">Github Repository</a><br>
+  <a href="{{ project.url }}">Deployed Project</a><br>
+  {{ projectpost.body }}<br>
+</p>
+{% endblock content %}

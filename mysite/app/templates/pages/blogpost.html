@@ -1,0 +1,9 @@
+{% extends 'templates/base.html' %}
+
+{% block content %}
+<p class="fg-darkest">
+  {{ blogpost.title }}<br>
+  {{ blogpost.timestamp|datetime('full') }}<br>
+  {{ blogpost.body }}<br>
+</p>
+{% endblock content %}
