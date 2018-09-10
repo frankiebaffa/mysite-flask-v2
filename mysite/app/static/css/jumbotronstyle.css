@@ -1,0 +1,45 @@
+.jumbotron {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  max-width: 800px;
+}
+.jumbotron-header {
+  margin: -35px 0px 10px 0px;
+}
+.jumbotron-title {
+  margin: -35px 0px 10px 0px;
+  font-size: 20px;
+}
+.jumbotron-sub-title {
+  font-size: 18px;
+}
+.jumbotron-p {
+  margin-bottom: 0px;
+}
+.read-more {
+  margin-top: -60px;
+}
+.jumbotron-sub-header {
+  font-size: 20px;
+}
+.jumbotron-link {
+  border-color: var(--lightest);
+}
+.pagination {
+  margin: 0px 0 10px 0;
+  justify-content: center;
+}
+.blog-container,
+.project-container,
+.article-container {
+  display: none;
+}
+/* ================= *
+ * MEDIA BREAKPOINTS *
+ * ================= */
+@media (max-width: 575px) {
+    .jumbotron-header {
+        margin: 0px 0 10px 0px;
+    }
+}
