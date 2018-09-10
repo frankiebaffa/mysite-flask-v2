@@ -80,3 +80,7 @@ p, a, span {
   font-family: Montserrat;
   color: red;
 }
+.p-title {
+  margin: 10px 0 10px 0;
+  text-decoration: underline;
+}
