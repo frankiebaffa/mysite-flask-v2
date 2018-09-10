@@ -3,8 +3,9 @@
   <ul class="pagination">
     {% for article in articles %}
     <li class="page-item jumbotron-item article-item">
-      <a class="page-link jumbotron-link article-link bg-light
-                fg-lightest hover-bg-dark hover-fg-darkest tran-fast"
+      <a class="page-link jumbotron-link article-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast"
                 id="article{{ article.id }}">{{ loop.index }}</a>
     </li>
     {% endfor %}
