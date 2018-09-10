@@ -9,40 +9,13 @@
 
 {% block content %}
 <div class="row">
-  <div class="jumbotron bg-darker tilt-border-darkest">
-    <h1 class="main-header jumbotron-header fg-lighter text-center">Projects</h1>
-    {# for item in projects #}
-    {# set counter = 0 #}
-    {# increment counter #}
-    <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
-    <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
-    {# endfor #}
-  </div>
-  <div class="jumbotron bg-darker tilt-border-darkest">
-    <h1 class="main-header jumbotron-header fg-lightest text-center">Blog</h1>
-    {% for blog in blogs %}
-    <h3 class="jumbotron-sub-header fg-lighter text-center">{{ blog.timestamp }}</h3>
-    <p class="jumbotron-p fg-light">{{ blog.body|string|truncate(280) }}</p>
-    <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
-    {% endfor %}
-    <ul class="pagination">
-      {% for blog in blogs %}
-      <li class="page-item jumbotron-item blog-item"><a class="page-link jumbotron-link blog-link bg-light fg-lightest hover-bg-dark hover-fg-darkest tran-fast" href="#">{{ loop.index }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="jumbotron bg-darker tilt-border-darkest">
-    <h1 class="main-header jumbotron-header fg-lighter text-center">Articles</h1>
-    {# for item in articles #}
-    {# set counter = 0 #}
-    {# increment counter #}
-    <p class="jumbotron-p fg-light">{# item.content #}{{ placeholder|string|truncate(280) }}</p>
-    <a class="read-more fg-lightest hover-fg-light tran-fast" href="{# url_for('this blog') #}">Read more</a>
-    {# endfor #}
-  </div>
+  {% include 'sections/projectotron.html' %}
+  {% include 'sections/blogotron.html' %}
+  {% include 'sections/articlotron.html' %}
 </div>
 {% endblock content %}
 
 {% block script %}
 {{ super() }}
+<script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 {% endblock script %}
