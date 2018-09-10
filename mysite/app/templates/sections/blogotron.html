@@ -1,5 +1,14 @@
 <div class="jumbotron bg-darker tilt-border-darkest">
   <h1 class="main-header jumbotron-header fg-lightest text-center">Blog</h1>
+  <ul class="pagination">
+    {% for blog in blogs %}
+    <li class="page-item jumbotron-item blog-item">
+      <a class="page-link jumbotron-link blog-link bg-light
+                fg-lightest hover-bg-dark hover-fg-darkest tran-fast"
+                id="blog{{ blog.id }}">{{ loop.index }}</a>
+    </li>
+    {% endfor %}
+  </ul>
   {% for blog in blogs %}
   <div class="blog-container" id="blog-container-{{ blog.id }}">
     <h3 class="jumbotron-sub-header fg-lighter text-center">
@@ -11,13 +20,4 @@
               href="{{ url_for('blogpost', post=blog.id) }}">Read more</a>
   </div>
   {% endfor %}
-  <ul class="pagination">
-    {% for blog in blogs %}
-    <li class="page-item jumbotron-item blog-item">
-      <a class="page-link jumbotron-link blog-link bg-light
-                fg-lightest hover-bg-dark hover-fg-darkest tran-fast"
-                id="blog{{ blog.id }}">{{ loop.index }}</a>
-    </li>
-    {% endfor %}
-  </ul>
 </div>
