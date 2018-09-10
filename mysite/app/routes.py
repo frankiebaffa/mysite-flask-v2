@@ -21,9 +21,21 @@ import feedparser
 @app.route('/index')
 # define function 'index'
 def index():
+    projects = Project.query.limit(10).all()
     blogs = Blog.query.limit(10).all()
     # return template at 'pages/index.html'
-    return render_template('pages/index.html', blogs=blogs)
+    return render_template('pages/index.html', projects=projects, blogs=blogs)
+
+@app.route('/blog/<post>', methods=['GET'])
+def blogpost(post):
+    blogpost = Blog.query.filter(Blog.id == post).first()
+    return render_template("pages/blogpost.html", blogpost=blogpost)
+
+@app.route('/project/<post>', methods=['GET'])
+def projectpost(post):
+    projectpost = Project.query.filter(Project.id == post).first()
+    return render_template("pages/projectpost.html", projectpost=projectpost)
+
 
 # create route 'news' at '/news'
 @app.route('/news')
@@ -64,12 +76,12 @@ def contact():
         else:
             msg = Message(form.subject.data, sender=app.config['MAIL_USERNAME'],
                 recipients=[app.config['CONTACT_EMAIL']])
-            msg.body = """
-            From: {} <{}>
-
-            {}
-            """.format(form.name.data, form.email.data, form.body.data)
+            msg.body = ContactEmail(form.name.data, form.email.data, form.body.data)
             mail.send(msg)
+            confirm = Message('Contact Confirmation', sender=app.config['MAIL_USERNAME'],
+                recipients=[form.email.data])
+            confirm.body = ConfirmationEmail(form.name.data)
+            mail.send(confirm)
             message = 'Your message has been sent!'
             return redirect(url_for('contact'))
     elif request.method == 'GET':
@@ -84,3 +96,26 @@ def contact():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+def ContactEmail(name, email, body):
+    message = """
+From: {} <{}>
+
+{}
+    """.format(name, email, body)
+    return message
+
+def ConfirmationEmail(name):
+    message = """
+Hello {},
+
+This email is confirming that your contact request from frankiebaffa.com has been sent.
+
+If you did not fill out the contact form on frankiebaffa.com/contact then please disregard this email.
+
+I will attempt to get back to you as soon as possible!
+
+ Frankie
+    """.format(name)
+    return message
+
