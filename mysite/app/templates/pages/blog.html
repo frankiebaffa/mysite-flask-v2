@@ -1,0 +1,17 @@
+{% extends 'templates/base.html' %}
+
+{% block style %}
+{{ super() }}
+{{ style('indexstyle.css') }}
+{{ style('jumbotronstyle.css') }}
+{% endblock style %}
+
+{% block content %}
+  <div class="row">
+    {% include 'sections/blogotron.html' %}
+  </div>
+{% endblock content %}
+
+{% block script %}
+{{ super() }}
+{% endblock script %}
