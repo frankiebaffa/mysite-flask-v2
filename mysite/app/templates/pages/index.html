@@ -1,7 +1,5 @@
 {% extends 'templates/base.html' %}
 
-{% set placeholder = "Vaporware everyday carry forage normcore, dreamcatcher jianbing pop-up palo santo YOLO distillery air plant cray mustache. Fanny pack tumblr subway tile you probably haven't heard of them polaroid dreamcatcher kale chips lumbersexual sriracha photo booth. Prism kale chips ennui semiotics occupy thundercats vinyl before they sold out polaroid tousled pitchfork lumbersexual fingerstache. Jianbing DIY vexillologist cloud bread intelligentsia, roof party before they sold out photo booth." %}
-
 {% block style %}
 {{ super() }}
 {{ style('indexstyle.css') }}
@@ -10,7 +8,11 @@
 {% block content %}
 <div class="row">
   {% include 'sections/projectotron.html' %}
+</div>
+<div class="row">
   {% include 'sections/blogotron.html' %}
+</div>
+<div class="row">
   {% include 'sections/articlotron.html' %}
 </div>
 {% endblock content %}
