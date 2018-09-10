@@ -39,7 +39,7 @@
     <ul class="navbar-nav mr-auto">
       {{ navitem(url_for('index'), "Home") }}
       {{ navitem('#projects', "Projects") }}
-      {{ navitem('#blog', "Blog") }}
+      {{ navitem(url_for('blog'), "Blog") }}
       {{ navitem('#about', "About") }}
       {{ navitem(url_for('contact'), "Contact") }}
       {% if not current_user.is_anonymous %}
