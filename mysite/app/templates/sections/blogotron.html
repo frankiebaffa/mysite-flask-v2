@@ -1,24 +1,54 @@
+{% if pagetype == "top" %}
 <div class="jumbotron bg-darker tilt-border-darkest">
   <h1 class="main-header jumbotron-header fg-lightest text-center">Blog</h1>
   <ul class="pagination">
-    {% for blog in blogs %}
+    {% for item in blog %}
     <li class="page-item jumbotron-item blog-item">
       <a class="page-link jumbotron-link blog-link bg-darker
                 fg-lighter hover-bg-lighter hover-fg-darker
                 tran-fast"
-                id="blog{{ blog.id }}">{{ loop.index }}</a>
+                id="blog{{ item.id }}">{{ loop.index }}</a>
     </li>
     {% endfor %}
   </ul>
-  {% for blog in blogs %}
-  <div class="blog-container" id="blog-container-{{ blog.id }}">
+  {% for item in blog %}
+  <div class="blog-container" id="blog-container-{{ item.id }}">
     <h3 class="jumbotron-sub-header fg-lighter text-center">
-      {{ blog.timestamp|datetime('full') }}
+      {{ item.timestamp|datetime('full') }}
     </h3>
-    <p class="jumbotron-p fg-light p-title">{{ blog.title }}</p>
-    <p class="jumbotron-p fg-light">{{ blog.body|string|truncate(280) }}</p>
+    <p class="jumbotron-p fg-light p-title">{{ item.title }}</p>
+    <p class="jumbotron-p fg-light">{{ item.body|string|truncate(280) }}</p>
     <a class="read-more fg-lightest hover-fg-light tran-fast"
-              href="{{ url_for('blogpost', post=blog.id) }}">Read more</a>
+              href="{{ url_for('blogpost', post=item.id) }}">Read more</a>
   </div>
   {% endfor %}
 </div>
+
+{% elif pagetype == "single" %}
+<div class="jumbotron bg-darker tilt-border-darkest">
+  <h1 class="main-header jumbotron-title fg-lightest text-center">{{ blog.title }}</h1>
+  <div class="single-blog-container" id="blog-container-{{ blog.id }}">
+    <h3 class="jumbotron-sub-title fg-lighter text-center">
+      {{ blog.timestamp|datetime('full') }}
+    </h3>
+    <p class="jumbotron-p fg-light">{{ blog.body|string }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast"
+              href="{{ back|string }}">Back to blogs...</a>
+  </div>
+</div>
+
+{% elif pagetype == "all" %}
+{% for item in blog %}
+<div class="jumbotron bg-darker tilt-border-darkest">
+  <h1 class="main-header jumbotron-title fg-lightest text-center">{{ item.title }}</h1>
+  <div class="single-blog-container" id="blog-container-{{ item.id }}">
+    <h3 class="jumbotron-sub-title fg-lighter text-center">
+      {{ item.timestamp|datetime('full') }}
+    </h3>
+    <p class="jumbotron-p fg-light">{{ item.body|string|truncate(280) }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast"
+              href="{{ url_for('blogpost', post=item.id) }}">Read more</a>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
