@@ -130,12 +130,14 @@
   border-style: solid;
   border-color: var(--lightest);
   border-width: 5px;
+  border-radius: 10px;
 }
 
 .tilt-border-darkest {
   border-style: solid;
   border-color: var(--darkest);
   border-width: 5px;
+  border-radius: 10px;
 }
 
 .active-bg-lightest:active {
