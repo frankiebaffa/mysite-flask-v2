@@ -185,3 +185,44 @@
 .active-fg-darkest:active {
   color: var(--darkest) !important;
 }
+.border-lightest {
+  border-color: var(--lightest) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.border-lighter {
+  border-color: var(--lighter) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.border-light {
+  border-color: var(--light) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.border-dark {
+  border-color: var(--dark) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.border-darker {
+  border-color: var(--darker) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.border-darkest {
+  border-color: var(--darkest) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
