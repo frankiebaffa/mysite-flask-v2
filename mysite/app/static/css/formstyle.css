@@ -5,3 +5,11 @@
   margin: 0 auto 0 auto;
   padding: 10;
 }
+
+.manage-form {
+  display: none;
+}
+
+.manage-submit {
+  margin: 10px auto 0 auto;
+}
