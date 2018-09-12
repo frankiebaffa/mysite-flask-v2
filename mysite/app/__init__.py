@@ -31,7 +31,7 @@ MailConfig(app)
 mail = Mail()
 mail.init_app(app)
 
-# create a jinja filter for datetime
+# create a jinja filter for datetime using babel
 def format_datetime(value, format='medium'):
     if format == 'full':
         format="EEEE, MMM d, y 'at' HH:mm"
