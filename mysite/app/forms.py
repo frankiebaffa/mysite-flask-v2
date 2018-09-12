@@ -8,22 +8,37 @@ from wtforms import SubmitField, TextAreaField
 #  require that they not be empty
 from wtforms.validators import DataRequired
 
+# login form with username, password, submit
 class LoginForm(FlaskForm):
+    # username string field
     username = StringField('Username', validators=[DataRequired()])
+    # password password field
     password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
+    # submit submit field
     submit = SubmitField('Sign In')
 
+# contact form with name, email, subject, body, submit
 class ContactForm(FlaskForm):
+    # name string field
     name = StringField('Name', validators=[DataRequired()])
+    # email string field
     email = StringField('Email Address', validators=[DataRequired()])
+    # subject string field
     subject = StringField('Subject', validators=[DataRequired()])
+    # bdoy text area field
     body = TextAreaField('Message', validators=[DataRequired()])
+    # submit submit field
     submit = SubmitField('Send')
 
+# content managing form with title, body, url, repo, submit
 class ContentForm(FlaskForm):
+    # title string field
     title = StringField('Title', validators=[DataRequired()])
+    # body text area field
     body = TextAreaField('Body', validators=[DataRequired()])
+    # url string field
     url = StringField('Content URL', validators=[DataRequired()])
+    # repo string field
     repo = StringField('Repository URL', validators=[DataRequired()])
+    # submit submit field
     submit = SubmitField('Submit')
