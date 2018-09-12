@@ -27,5 +27,3 @@ class ContentForm(FlaskForm):
     url = StringField('Content URL', validators=[DataRequired()])
     repo = StringField('Repository URL', validators=[DataRequired()])
     submit = SubmitField('Submit')
-    delete = SubmitField('Delete')
-    edit = SubmitField('Edit')
