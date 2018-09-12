@@ -1,0 +1,64 @@
+<div class="form-container project-form-container bg-darker tilt-border-darkest">
+  <h1 class="main-header fg-lightest text-center">Projects</h1>
+  <ul class="pagination">
+    <li class="page-item jumbotron-item">
+      <a class="page-link jumbotron-link blog-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast create-button project-button" id="createProjectButton">Create</a>
+    </li>
+    <li class="page-item jumbotron-item">
+      <a class="page-link jumbotron-link blog-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast edit-button project-button" id="editProjectButton">Edit</a>
+    </li>
+  </ul>
+  <p>{{ user }}</p>
+  <form class="manage-form create-form project-form" action="{{ url_for('createproject') }}" method="post" id="createProjectForm">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.title.label(for="inputTitle", class_="fg-lighter") }}<br>
+      {{ form.title(class_="form-control bg-lighter fg-darkest", id="inputTitle", placeholder="Title") }}
+    </div>
+    <div class="form-group">
+      {{ form.body.label(for="inputBody", class_="fg-lighter") }}<br>
+      {{ form.body(class_="form-control bg-lighter fg-darkest", id="inputBody", placeholder="Body") }}
+    </div>
+    <div class="form-group">
+      {{ form.url.label(for="inputUrl", class_="fg-lighter") }}<br>
+      {{ form.url(class_="form-control bg-lighter fg-darkest", id="inputUrl", placeholder="Project URL") }}
+    </div>
+    <div class_="form-group">
+      {{ form.repo.label(for="inputRepo", class_="fg-lighter") }}<br>
+      {{ form.repo(class_="form-control bg-lighter fg-darkest", id="inputRepo", placeholder="Project Repo") }}
+    </div>
+    {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
+  </form>
+  <form class="manage-form edit-form project-form" action="{{ url_for('editproject') }}" method="post" id="editProjectForm">
+    <div class="form-group">
+      <label for="selectProject" class="fg-lighter">Select Project</label>
+      <select class="form-control bg-lighter fg-darkest" name="id" id="selectProject">
+        {% for project in projects %}
+        <option value={{ project.id }}>{{ project.timestamp|datetime('full') }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.title.label(for="newInputTitle", class_="fg-lighter") }}<br>
+      {{ form.title(class_="form-control bg-lighter fg-darkest edit-field", id="newInputTitle", placeholder="Title") }}
+    </div>
+    <div class="form-group">
+      {{ form.body.label(for="newInputBody", class_="fg-lighter") }}<br>
+      {{ form.body(class_="form-control bg-lighter fg-darkest edit-field", id="newInputBody", placeholder="Body") }}
+    </div>
+    <div class="form-group">
+      {{ form.url.label(for="newInputUrl", class_="fg-lighter") }}<br>
+      {{ form.url(class_="form-control bg-lighter fg-darkest edit-field", id="newInputUrl", placeholder="Project URL") }}
+    </div>
+    <div class_="form-group">
+      {{ form.repo.label(for="newInputRepo", class_="fg-lighter") }}<br>
+      {{ form.repo(class_="form-control bg-lighter fg-darkest edit-field", id="newInputRepo", placeholder="Project Repo") }}
+    </div>
+    {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
+  </form>
+</div>
