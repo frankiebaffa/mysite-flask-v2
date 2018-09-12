@@ -1,5 +1,5 @@
 # import application initialization
-from app import app
+from app import app, db
 # render_template for using Jinja2 templates
 from flask import render_template, flash, redirect, url_for, request
 # get flask_login modules current_user and login_user
@@ -21,8 +21,8 @@ import feedparser
 @app.route('/index')
 # define function 'index'
 def index():
-    projects = Project.query.limit(10).all()
-    blog = Blog.query.limit(10).all()
+    projects = Project.query.order_by(Project.id.desc()).limit(10).all()
+    blog = Blog.query.order_by(Blog.id.desc()).limit(10).all()
     pagetype = "top"
     # return template at 'pages/index.html'
     return render_template('pages/index.html', projects=projects, blog=blog, pagetype=pagetype)
@@ -62,7 +62,7 @@ def projectpost(post):
 def login():
     form = LoginForm()
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('manage'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -80,8 +80,7 @@ def contact():
     form = ContactForm()
     if request.method == 'POST':
         if form.validate() == False:
-            message = 'All fields are required.'
-            return render_template('pages/contact.html', form=form, message=message)
+            return render_template('pages/contact.html', form=form)
         else:
             msg = Message(form.subject.data, sender=app.config['MAIL_USERNAME'],
                 recipients=[app.config['CONTACT_EMAIL']])
@@ -91,11 +90,9 @@ def contact():
                 recipients=[form.email.data])
             confirm.body = ConfirmationEmail(form.name.data)
             mail.send(confirm)
-            message = 'Your message has been sent!'
             return redirect(url_for('contact'))
     elif request.method == 'GET':
-        message = ''
-        return render_template('pages/contact.html', form=form, message=message)
+        return render_template('pages/contact.html', form=form)
 
 #=======================================#
 #       All below methods must          #
@@ -109,11 +106,39 @@ def contact():
 def manage():
     projects = Project.query.all()
     blogs = Blog.query.all()
-    articles = Article.query.all()
-    content = [projects, blogs, articles]
+    content = [projects, blogs]
+    form = ContentForm()
+    return render_template('pages/manage.html', content=content,
+            form=form, projects=projects)
 
-    return render_template('pages/manage.html', content=content)
+@app.route('/manage/createproject', methods=['POST'])
+@login_required
+def createproject():
+    title = request.form.get("title")
+    body = request.form.get("body")
+    url = request.form.get("url")
+    repo = request.form.get("repo")
+    db.session.add(project)
+    db.session.commit()
+    return redirect(url_for('manage'))
 
+@app.route('/manage/editproject', methods=['POST'])
+@login_required
+def editproject():
+    project_id = request.form.get("id")
+    title = request.form.get("title")
+    body = request.form.get("body")
+    url = request.form.get("url")
+    repo = request.form.get("repo")
+    project = Project.query.filter(Project.id==project_id).first()
+    project.title = title
+    project.body = body
+    project.url = url
+    project.repo = repo
+    db.session.add(project)
+    db.session.commit()
+    return redirect(url_for('manage'))
+    
 # create route to logout method
 # only allow if user is logged in
 @app.route('/logout')
