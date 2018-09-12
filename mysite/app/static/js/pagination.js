@@ -15,7 +15,7 @@ $(document).ready(function pagination() {
   $(links).each(function eachLinkGroup(i, elements) {
     $(elements).each(function eachLink(j, element) {
       $(element).click(function postLinkOnClick() {
-        $(links[i]).removeClass('bg-lighter fg-darker');
+        $(links[i]).removeClass('bg-lightest fg-darker');
         $(links[i]).addClass('bg-darker fg-lighter');
         $(element).removeClass('bg-darker fg-lighter');
         $(element).addClass('bg-lightest fg-darker');
