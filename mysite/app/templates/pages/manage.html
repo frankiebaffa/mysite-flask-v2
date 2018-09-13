@@ -12,6 +12,11 @@
     {% include 'sections/projectform.html' %}
   </div>
 </div>
+<div class="row">
+  <div class="col">
+    {% include 'sections/blogform.html' %}
+  </div>
+</div>
 {% endblock content %}
 
 {% block script %}
@@ -29,6 +34,20 @@
   ];
   $projects.push($project{{ project.id }});
   {% endfor %}
+
+  var $blogs = [];
+  {% for blog in blogs %}
+  var $blog{{ blog.id }} = [
+    {{ blog.id }},
+    "{{ blog.title }}",
+    "{{ blog.body }}",
+    "{{ blog.url }}",
+    "{{ blog.repo }}"
+  ];
+  $blogs.push($blog{{ blog.id }});
+  {% endfor %}
+
+  var $content = [$projects, $blogs];
 </script>
 {{ script('editfill.js') }}
 {% endblock script %}
