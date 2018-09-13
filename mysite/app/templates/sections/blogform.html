@@ -1,0 +1,48 @@
+<div class="form-container blog-form-container bg-darker tilt-border-darkest">
+  <h1 class="main-header fg-lightest text-center">Blog</h1>
+  <ul class="pagination">
+    <li class="page-item jumbotron-item">
+      <a class="page-link jumbotron-link blog-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast create-button blog-button" id="createProjectButton">Create</a>
+    </li>
+    <li class="page-item jumbotron-item">
+      <a class="page-link jumbotron-link blog-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast edit-button blog-button" id="editProjectButton">Edit</a>
+    </li>
+  </ul>
+  <p>{{ user }}</p>
+  <form class="manage-form create-form blog-form" action="{{ url_for('createblog') }}" method="post" id="createProjectForm">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.title.label(for="inputTitle", class_="fg-lighter") }}<br>
+      {{ form.title(class_="form-control bg-lighter fg-darkest", id="inputTitle", placeholder="Title") }}
+    </div>
+    <div class="form-group">
+      {{ form.body.label(for="inputBody", class_="fg-lighter") }}<br>
+      {{ form.body(class_="form-control bg-lighter fg-darkest manage-textareafield", id="inputBody", placeholder="Body") }}
+    </div>
+    {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
+  </form>
+  <form class="manage-form edit-form blog-form" action="{{ url_for('editblog') }}" method="post" id="editProjectForm">
+    <div class="form-group">
+      <label for="selectProject" class="fg-lighter">Select Blog</label>
+      <select class="form-control bg-lighter fg-darkest" name="id" id="selectBlog">
+        {% for blog in blogs %}
+        <option value={{ blog.id }}>{{ blog.timestamp|datetime('full') }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.title.label(for="newInputTitle", class_="fg-lighter") }}<br>
+      {{ form.title(class_="form-control bg-lighter fg-darkest edit-field blog-edit", id="newInputTitle", placeholder="Title") }}
+    </div>
+    <div class="form-group">
+      {{ form.body.label(for="newInputBody", class_="fg-lighter") }}<br>
+      {{ form.body(class_="form-control bg-lighter fg-darkest edit-field blog-edit manage-textareafield", id="newInputBody", placeholder="Body") }}
+    </div>
+    {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
+  </form>
+</div>
