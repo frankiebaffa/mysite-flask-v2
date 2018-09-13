@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
       {{ form.body.label(for="inputBody", class_="fg-lighter") }}<br>
-      {{ form.body(class_="form-control bg-lighter fg-darkest", id="inputBody", placeholder="Body") }}
+      {{ form.body(class_="form-control bg-lighter fg-darkest manage-textareafield", id="inputBody", placeholder="Body") }}
     </div>
     <div class="form-group">
       {{ form.url.label(for="inputUrl", class_="fg-lighter") }}<br>
@@ -45,19 +45,19 @@
     {{ form.hidden_tag() }}
     <div class="form-group">
       {{ form.title.label(for="newInputTitle", class_="fg-lighter") }}<br>
-      {{ form.title(class_="form-control bg-lighter fg-darkest edit-field", id="newInputTitle", placeholder="Title") }}
+      {{ form.title(class_="form-control bg-lighter fg-darkest edit-field project-edit", id="newInputTitle", placeholder="Title") }}
     </div>
     <div class="form-group">
       {{ form.body.label(for="newInputBody", class_="fg-lighter") }}<br>
-      {{ form.body(class_="form-control bg-lighter fg-darkest edit-field", id="newInputBody", placeholder="Body") }}
+      {{ form.body(class_="form-control bg-lighter fg-darkest edit-field project-edit manage-textareafield", id="newInputBody", placeholder="Body") }}
     </div>
     <div class="form-group">
       {{ form.url.label(for="newInputUrl", class_="fg-lighter") }}<br>
-      {{ form.url(class_="form-control bg-lighter fg-darkest edit-field", id="newInputUrl", placeholder="Project URL") }}
+      {{ form.url(class_="form-control bg-lighter fg-darkest edit-field project-edit", id="newInputUrl", placeholder="Project URL") }}
     </div>
     <div class_="form-group">
       {{ form.repo.label(for="newInputRepo", class_="fg-lighter") }}<br>
-      {{ form.repo(class_="form-control bg-lighter fg-darkest edit-field", id="newInputRepo", placeholder="Project Repo") }}
+      {{ form.repo(class_="form-control bg-lighter fg-darkest edit-field project-edit", id="newInputRepo", placeholder="Project Repo") }}
     </div>
     {{ form.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
   </form>
