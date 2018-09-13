@@ -118,6 +118,8 @@ def createproject():
     body = request.form.get("body")
     url = request.form.get("url")
     repo = request.form.get("repo")
+    project = Project(title=title, body=body, url=url, repo=repo,
+            user_id=current_user.id)
     db.session.add(project)
     db.session.commit()
     return redirect(url_for('manage'))
@@ -144,6 +146,7 @@ def editproject():
 def createblog():
     title = request.form.get("title")
     body = request.form.get("body")
+    blog = Blog(title=title, body=body, user_id=current_user.id)
     db.session.add(blog)
     db.session.commit()
     return redirect(url_for('manage'))
