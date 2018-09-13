@@ -21,8 +21,8 @@ import feedparser
 @app.route('/index')
 # define function 'index'
 def index():
-    projects = Project.query.order_by(Project.id.desc()).limit(10).all()
-    blog = Blog.query.order_by(Blog.id.desc()).limit(10).all()
+    projects = Project.query.order_by(Project.id.desc()).limit(5).all()
+    blog = Blog.query.order_by(Blog.id.desc()).limit(5).all()
     pagetype = "top"
     # return template at 'pages/index.html'
     return render_template('pages/index.html', projects=projects, blog=blog, pagetype=pagetype)
@@ -67,10 +67,10 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            message = 'Invalid username or password'
             return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('index'))
+        login_user(user)
+        return redirect(url_for('manage'))
     return render_template('pages/login.html', title='Sign In', form=form)
 
 # create route to contact method
@@ -109,7 +109,7 @@ def manage():
     content = [projects, blogs]
     form = ContentForm()
     return render_template('pages/manage.html', content=content,
-            form=form, projects=projects)
+            form=form, projects=projects, blogs=blogs)
 
 @app.route('/manage/createproject', methods=['POST'])
 @login_required
@@ -138,7 +138,29 @@ def editproject():
     db.session.add(project)
     db.session.commit()
     return redirect(url_for('manage'))
-    
+
+@app.route('/manage/createblog', methods=['POST'])
+@login_required
+def createblog():
+    title = request.form.get("title")
+    body = request.form.get("body")
+    db.session.add(blog)
+    db.session.commit()
+    return redirect(url_for('manage'))
+
+@app.route('/manage/editblog', methods=['POST'])
+@login_required
+def editblog():
+    blog_id = request.form.get("id")
+    title = request.form.get("title")
+    body = request.form.get("body")
+    blog = Blog.query.filter(Blog.id==blog_id).first()
+    blog.title = title
+    blog.body = body
+    db.session.add(blog)
+    db.session.commit()
+    return redirect(url_for('manage'))
+
 # create route to logout method
 # only allow if user is logged in
 @app.route('/logout')
