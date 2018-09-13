@@ -13,3 +13,12 @@
 .manage-submit {
   margin: 10px auto 0 auto;
 }
+
+.project-form-container,
+.blog-form-container {
+  margin: 0 auto 20px auto;
+}
+
+.manage-textareafield {
+  height: 200px !important;
+}
