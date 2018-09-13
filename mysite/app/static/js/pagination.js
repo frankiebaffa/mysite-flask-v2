@@ -10,7 +10,7 @@ $(document).ready(function pagination() {
   $(posts).each(function eachPost(index, element) {
     $(element[0]).show();
     $(links[index][0]).removeClass('bg-darker fg-lighter');
-    $(links[index[0]]).addClass('bg-lightest fg-darker');
+    $(links[index][0]).addClass('bg-lightest fg-darker');
   });
   $(links).each(function eachLinkGroup(i, elements) {
     $(elements).each(function eachLink(j, element) {
