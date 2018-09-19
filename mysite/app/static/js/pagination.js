@@ -1,12 +1,12 @@
 $(document).ready(function pagination() {
   var projects = $('.project-container');
   var blogs = $('.blog-container');
-  var articles = $('.article-container');
-  var posts = [projects, blogs, articles];
+  var reviews = $('.review-container');
+  var posts = [projects, blogs, reviews];
   var projectLinks = $('.project-link');
   var blogLinks = $('.blog-link');
-  var articleLinks = $('.article-link');
-  var links = [projectLinks, blogLinks, articleLinks];
+  var reviewLinks = $('.review-link');
+  var links = [projectLinks, blogLinks, reviewLinks];
   $(posts).each(function eachPost(index, element) {
     $(element[0]).show();
     $(links[index][0]).removeClass('bg-darker fg-lighter');
