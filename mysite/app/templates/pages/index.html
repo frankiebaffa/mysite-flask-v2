@@ -8,13 +8,19 @@
 
 {% block content %}
 <div class="row">
+  {% if projects != [] %}
   {% include 'sections/projectotron.html' %}
+  {% endif %}
 </div>
 <div class="row">
+  {% if blog != [] %}
   {% include 'sections/blogotron.html' %}
+  {% endif %}
 </div>
 <div class="row">
-  {% include 'sections/articlotron.html' %}
+  {% if reviews != [] %}
+  {% include 'sections/reviewotron.html' %}
+  {% endif %}
 </div>
 {% endblock content %}
 
