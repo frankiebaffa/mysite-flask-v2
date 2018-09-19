@@ -17,6 +17,21 @@
   </li>
 {%- endmacro %}
 
+{% macro dynamicdrop(title, link, sublink, items) -%}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle fg-lightest bg-darkest hover-bg-darkest hover-fg-dark tran-fast" href={{ link }} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ title }}
+    </a>
+    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+    {% for item in items %}
+    <a class="dropdown-item fg-lighter hover-bg-dark hover-fg-darkest tran-fast" href="{{ sublink }}{{ item.id|string }}">
+      {{ item.timestamp|datetime('short') }}
+    </a>
+    {% endfor %}
+    </div>
+  </li>
+{%- endmacro %}
+
 {% macro navdivide() -%}
   <div class="dropdown-divider"></div>
 {%- endmacro %}
@@ -38,9 +53,21 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       {{ navitem(url_for('index'), "Home") }}
+      {% if title != 'Projects' %}
       {{ navitem(url_for('projects'), "Projects") }}
+      {% elif title == 'Projects' %}
+      {{ dynamicdrop("Project List", "#", "#project-container-", projects) }}
+      {% endif %}
+      {% if title != 'Blogs' %}
       {{ navitem(url_for('blog'), "Blog") }}
+      {% elif title == 'Blogs' %}
+      {{ dynamicdrop("Blog List", "#", "#blog-container-", blog) }}
+      {% endif %}
+      {% if title != 'Reviews' %}
       {{ navitem(url_for('reviews'), "Reviews") }}
+      {% elif title == 'Reviews' %}
+      {{ dynamicdrop("Review List", "#", "#review-container-", reviews) }}
+      {% endif %}
       {# navitem(url_for('about'), "About") #}
       {{ navitem(url_for('contact'), "Contact") }}
       {% if not current_user.is_anonymous %}
