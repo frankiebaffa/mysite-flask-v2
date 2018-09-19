@@ -3,11 +3,13 @@ $(document).ready(function fillOnReady() {
   var $projectFields = $('.project-edit');
   // assign all blog-edit fields to variable
   var $blogFields = $('.blog-edit');
+  // assign all review-edit fields to variable
+  var $reviewFields = $('.review-edit');
   // add other content types here
   
   // assign all field categories to variable
   //   append with additional content categories if neccessary
-  var $fields = [$projectFields, $blogFields];
+  var $fields = [$projectFields, $blogFields, $reviewFields];
 
   // for each field category in $fields
   $($fields).each(function eachFieldCategory(i, category) {
