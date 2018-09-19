@@ -17,6 +17,11 @@
     {% include 'sections/blogform.html' %}
   </div>
 </div>
+<div class="row">
+  <div class="col">
+    {% include 'sections/reviewform.html' %}
+  </div>
+</div>
 {% endblock content %}
 
 {% block script %}
@@ -47,7 +52,20 @@
   $blogs.push($blog{{ blog.id }});
   {% endfor %}
 
-  var $content = [$projects, $blogs];
+  var $reviews = [];
+  {% for review in reviews %}
+  var $review{{ review.id }} = [
+    {{ review.id }},
+    "{{ review.title }}",
+    "{{ review.body }}",
+    "{{ review.url }}",
+    "{{ review.repo }}"
+  ];
+  $reviews.push($review{{ review.id }});
+  {% endfor %}
+
+
+  var $content = [$projects, $blogs, $reviews];
 </script>
 {{ script('editfill.js') }}
 {% endblock script %}
