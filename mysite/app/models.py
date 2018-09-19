@@ -75,3 +75,25 @@ class Project(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     # Column user_id, type integer, foreign key from User.id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # When called...
+    def __repr__(self):
+        return '<Project {}>'.format(self.title)
+
+class Review(db.Model):
+    # Column id, type integer, primary key
+    id = db.Column(db.Integer, primary_key=True)
+    # Column title, type string(100)
+    title = db.Column(db.String(100))
+    # Column body, type string (1000)
+    body = db.Column(db.String(10000))
+    # Column url, type string(100)
+    url = db.Column(db.String(100))
+    # Column timestamp, type datetime
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    # Column user_id, type integer, foreign key from User.id
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # When called...
+    def __repr__(self):
+        return '<Review {}>'.format(self.title)
