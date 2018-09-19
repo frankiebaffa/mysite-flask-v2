@@ -84,3 +84,7 @@ p, a, span {
   margin: 10px 0 10px 0;
   text-decoration: underline;
 }
+.footer-p {
+  font-size: 12px;
+  font-style: italic;
+}
