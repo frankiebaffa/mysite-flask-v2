@@ -8,6 +8,17 @@
 
 {% block content %}
   <div class="row">
+    <div class="col">
+      <h1 class="main-header text-center">
+        {% if pagetype == "single" %}
+        Blog Post
+        {% elif pagetype == "all" %}
+        Blog
+        {% endif %}
+      </h1>
+    </div>
+  </div>
+  <div class="row">
     {% include 'sections/blogotron.html' %}
   </div>
 {% endblock content %}
