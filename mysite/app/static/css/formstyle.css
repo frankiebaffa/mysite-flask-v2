@@ -1,6 +1,5 @@
 .form-container {
-  max-width: 400px;
-  min-width: 300px;
+  max-width: 800px;
   width: 90%;
   margin: 0 auto 0 auto;
   padding: 10;
@@ -21,4 +20,7 @@
 
 .manage-textareafield {
   height: 200px !important;
+}
+.bottom-form {
+  margin-bottom: 10px;
 }
