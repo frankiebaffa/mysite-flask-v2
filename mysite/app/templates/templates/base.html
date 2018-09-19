@@ -7,7 +7,11 @@
 
 {% block title %}
 {{ super() }}
+{% if title %}
+<title>{{ title }} - Frankie Baffa</title>
+{% else %}
 <title>Frankie Baffa</title>
+{% endif %}
 {% endblock title %}
 
 {% block meta %}
@@ -40,6 +44,7 @@
 
 {% block foot %}
 {{ super() }}
+{% include 'sections/footer.html' %}
 {% endblock foot %}
 
 {% block script %}
