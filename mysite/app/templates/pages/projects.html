@@ -1,0 +1,28 @@
+{% extends 'templates/base.html' %}
+
+{% block style %}
+{{ super() }}
+{{ style('indexstyle.css') }}
+{{ style('jumbotronstyle.css') }}
+{% endblock style %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <h1 class="main-header text-center">
+        {% if pagetype == "single" %}
+        Project
+        {% elif pagetype == "all" %}
+        Projects
+        {% endif %}
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    {% include 'sections/projectotron.html' %}
+  </div>
+{% endblock content %}
+
+{% block script %}
+{{ super() }}
+{% endblock script %}
