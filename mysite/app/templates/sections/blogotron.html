@@ -16,7 +16,7 @@
     <h3 class="jumbotron-sub-header fg-lighter text-center">
       {{ item.timestamp|datetime('full') }}
     </h3>
-    <p class="jumbotron-p fg-light p-title">{{ item.title }}</p>
+    <p class="jumbotron-p fg-lighter p-title text-center">{{ item.title }}</p>
     <p class="jumbotron-p fg-light">{{ item.body|string|truncate(280) }}</p>
     <a class="read-more fg-lightest hover-fg-light tran-fast"
               href="{{ url_for('blogpost', post=item.id) }}">Read more</a>
