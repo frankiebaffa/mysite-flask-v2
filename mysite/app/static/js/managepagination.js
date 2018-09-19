@@ -1,12 +1,12 @@
 $(document).ready(function managePagination() {
   var projectForms = $('.project-form');
   var blogForms = $('.blog-form');
-  var articleForms = $('.article-form');
+  var reviewForms = $('.review-form');
   var projectButtons = $('.project-button');
   var blogButtons = $('.blog-button');
-  var articleButtons = $('.article-button');
-  var forms = [projectForms, blogForms, articleForms];
-  var buttons = [projectButtons, blogButtons, articleButtons];
+  var reviewButtons = $('.review-button');
+  var forms = [projectForms, blogForms, reviewForms];
+  var buttons = [projectButtons, blogButtons, reviewButtons];
   $(forms).each(function eachForm(index, element) {
     $(element[0]).show();
     $(buttons[index][0]).removeClass('bg-darker fg-lighter');
