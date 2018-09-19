@@ -39,9 +39,9 @@
 
 {% elif pagetype == "all" %}
 {% for item in blog %}
-<div class="jumbotron bg-darker tilt-border-darkest">
+<div class="jumbotron bg-darker tilt-border-darkest" id="blog-container-{{ item.id }}">
   <h1 class="main-header jumbotron-title fg-lightest text-center">{{ item.title }}</h1>
-  <div class="single-blog-container" id="blog-container-{{ item.id }}">
+  <div class="single-blog-container">
     <h3 class="jumbotron-sub-title fg-lighter text-center">
       {{ item.timestamp|datetime('full') }}
     </h3>

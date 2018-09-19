@@ -39,9 +39,9 @@
 
 {% elif pagetype == "all" %}
 {% for project in projects %}
-<div class="jumbotron bg-darker tilt-border-darkest">
+<div class="jumbotron bg-darker tilt-border-darkest" id="project-container-{{ project.id }}">
   <h1 class="main-header jumbotron-title fg-lightest text-center">{{ project.title }}</h1>
-  <div class="single-project-container" id="project-container-{{ project.id }}">
+  <div class="single-project-container">
     <h3 class="jumbotron-sub-title fg-lighter text-center">
       {{ project.timestamp|datetime('full') }}
     </h3>

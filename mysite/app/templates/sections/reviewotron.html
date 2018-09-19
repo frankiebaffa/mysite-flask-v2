@@ -39,9 +39,9 @@
 
 {% elif pagetype == "all" %}
 {% for review in reviews %}
-<div class="jumbotron bg-darker tilt-border-darkest">
+<div class="jumbotron bg-darker tilt-border-darkest" id="review-container-{{ review.id }}">
   <h1 class="main-header jumbotron-title fg-lightest text-center">{{ review.title }}</h1>
-  <div class="single-review-container" id="review-container-{{ review.id }}">
+  <div class="single-review-container">
     <h3 class="jumbotron-sub-title fg-lighter text-center">
       {{ review.timestamp|datetime('full') }}
     </h3>
