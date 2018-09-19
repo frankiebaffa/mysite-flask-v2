@@ -1,12 +1,15 @@
-<form action="" method="post">
-  {{ form.hidden_tag() }}
-  <div class="form-group">
-    {{ form.username.label(for="inputUsername", class_="fg-darker") }}<br>
-    {{ form.username(size=32, class_="form-control fg-lightest bg-darkest", id="inputUsername", placeholder="Username") }}
-  </div>
-  <div class="form-group">
-    {{ form.password.label(for="inputPassword", class_="fg-darker") }}<br>
-    {{ form.password(size=32, class_="form-control fg-lightest bg-darkest", id="inputPassword", placeholder="Password") }}
-  </div>
-  {{ form.submit(class_="btn center bg-darkest fg-lightest hover-bg-lightest hover-fg-darkest tran-fast") }}
-</form>
+<div class="form-container bg-darker tilt-border-darkest bottom-form">
+  <h1 class="main-header fg-lightest text-center">Login</h1>
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.username.label(for="inputUsername", class_="fg-lighter") }}<br>
+      {{ form.username(size=32, class_="form-control fg-darkest bg-lighter", id="inputUsername", placeholder="Username") }}
+    </div>
+    <div class="form-group">
+      {{ form.password.label(for="inputPassword", class_="fg-lighter") }}<br>
+      {{ form.password(size=32, class_="form-control fg-darkest bg-lighter", id="inputPassword", placeholder="Password") }}
+    </div>
+    {{ form.submit(class_="btn center bg-lightest fg-darkest hover-bg-darkest hover-fg-lightest tran-fast") }}
+  </form>
+</div>
