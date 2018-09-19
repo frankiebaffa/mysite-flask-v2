@@ -38,9 +38,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       {{ navitem(url_for('index'), "Home") }}
-      {{ navitem('#projects', "Projects") }}
+      {{ navitem(url_for('projects'), "Projects") }}
       {{ navitem(url_for('blog'), "Blog") }}
-      {{ navitem('#about', "About") }}
+      {{ navitem(url_for('reviews'), "Reviews") }}
+      {# navitem(url_for('about'), "About") #}
       {{ navitem(url_for('contact'), "Contact") }}
       {% if not current_user.is_anonymous %}
       {{ navitem(url_for('manage'), "Manage") }}
