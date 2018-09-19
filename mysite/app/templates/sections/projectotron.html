@@ -1,10 +1,12 @@
+{% if pagetype == "top" %}
 <div class="jumbotron bg-darker tilt-border-darkest">
   <h1 class="main-header jumbotron-header fg-lightest text-center">Projects</h1>
   <ul class="pagination">
     {% for project in projects %}
     <li class="page-item jumbotron-item project-item">
       <a class="page-link jumbotron-link project-link bg-darker
-                fg-lighter hover-bg-lighter hover-fg-darker tran-fast"
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast"
                 id="project{{ project.id }}">{{ loop.index }}</a>
     </li>
     {% endfor %}
@@ -14,10 +16,39 @@
     <h3 class="jumbotron-sub-header fg-lighter text-center">
       {{ project.timestamp|datetime('full') }}
     </h3>
-    <p class="jumbotron-p fg-light p-title">{{ project.title }}</p>
+    <p class="jumbotron-p fg-lighter p-title text-center">{{ project.title }}</p>
     <p class="jumbotron-p fg-light">{{ project.body|string|truncate(280) }}</p>
     <a class="read-more fg-lightest hover-fg-light tran-fast"
               href="{{ url_for('projectpost', post=project.id) }}">Read more</a>
   </div>
   {% endfor %}
 </div>
+
+{% elif pagetype == "single" %}
+<div class="jumbotron bg-darker tilt-border-darkest">
+  <h1 class="main-header jumbotron-title fg-lightest text-center">{{ project.title }}</h1>
+  <div class="single-project-container" id="project-container-{{ project.id }}">
+    <h3 class="jumbotron-sub-title fg-lighter text-center">
+      {{ project.timestamp|datetime('full') }}
+    </h3>
+    <p class="jumbotron-p fg-light">{{ project.body|string }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast"
+              href="{{ back|string }}">Back to projects...</a>
+  </div>
+</div>
+
+{% elif pagetype == "all" %}
+{% for project in projects %}
+<div class="jumbotron bg-darker tilt-border-darkest">
+  <h1 class="main-header jumbotron-title fg-lightest text-center">{{ project.title }}</h1>
+  <div class="single-project-container" id="project-container-{{ project.id }}">
+    <h3 class="jumbotron-sub-title fg-lighter text-center">
+      {{ project.timestamp|datetime('full') }}
+    </h3>
+    <p class="jumbotron-p fg-light">{{ project.body|string|truncate(280) }}</p>
+    <a class="read-more fg-lightest hover-fg-light tran-fast"
+              href="{{ url_for('projectpost', post=project.id) }}">Read more</a>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
