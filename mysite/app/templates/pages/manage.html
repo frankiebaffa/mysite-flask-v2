@@ -38,53 +38,6 @@
 {% block script %}
 {{ super() }}
 {{ script('managepagination.js') }}
-<script>
-  var $content = [];
-  {% if projects != [] %}
-  var $projects = [];
-  {% for project in projects %}
-  var $project{{ project.id }} = [
-    {{ project.id }},
-    "{{ project.title }}",
-    "{{ project.body }}",
-    "{{ project.url }}",
-    "{{ project.repo }}"
-  ];
-  $projects.push($project{{ project.id }});
-  {% endfor %}
-  if ($projects !== 0) { $content.push($projects) };
-  {% endif %}
-
-  {% if blogs != [] %}
-  var $blogs = [];
-  {% for blog in blogs %}
-  var $blog{{ blog.id }} = [
-    {{ blog.id }},
-    "{{ blog.title }}",
-    "{{ blog.body }}",
-    "{{ blog.url }}",
-    "{{ blog.repo }}"
-  ];
-  $blogs.push($blog{{ blog.id }});
-  {% endfor %}
-  if ($blogs !== 0) { $content.push($blogs) };
-  {% endif %}
-
-  {% if reviews != [] %}
-  var $reviews = [];
-  {% for review in reviews %}
-  var $review{{ review.id }} = [
-    {{ review.id }},
-    "{{ review.title }}",
-    "{{ review.body }}",
-    "{{ review.url }}",
-    "{{ review.repo }}"
-  ];
-  $reviews.push($review{{ review.id }});
-  {% endfor %}
-  if ($reviews !== 0) { $content.push($reviews) };
-  {% endif %}
-
-</script>
+{% include 'js/contentarray.html' %}
 {{ script('editfill.js') }}
 {% endblock script %}
