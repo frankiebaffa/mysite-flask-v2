@@ -9,13 +9,11 @@
 {% block content %}
   <div class="row">
     <div class="col">
+      {% if pagetype == "all" %}
       <h1 class="main-header text-center">
-        {% if pagetype == "single" %}
-        Review
-        {% elif pagetype == "all" %}
         Reviews
-        {% endif %}
       </h1>
+      {% endif %}
     </div>
   </div>
   <div class="row">
