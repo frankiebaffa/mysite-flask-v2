@@ -9,9 +9,11 @@ Flask-Mail==0.9.1
 Flask-Migrate==2.2.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
+html2text==2018.1.9
 itsdangerous==0.24
 Jinja2==2.10
 Mako==1.0.7
+Markdown==2.6.11
 MarkupSafe==1.0
 python-dateutil==2.7.3
 python-dotenv==0.9.1
