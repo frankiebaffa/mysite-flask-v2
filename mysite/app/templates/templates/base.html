@@ -37,11 +37,11 @@
 {% block body %}
 {{ super() }}
 {% endblock body %}
-
-{% block content %}
-{{ super() }}
-{% endblock content %}
-
+<div class="container-fluid">
+  {% block content %}
+  {{ super() }}
+  {% endblock content %}
+</div>
 {% block foot %}
 {{ super() }}
 {% include 'sections/footer.html' %}
