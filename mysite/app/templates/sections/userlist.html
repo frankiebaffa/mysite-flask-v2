@@ -1,0 +1,6 @@
+<div class="user-container form-container bg-darker tilt-border-darkest">
+  <h1 class="main-header fg-lightest text-center">Users</h1>
+  {% for user in users %}
+  <p class="fg-lighter text-center">{{ user.id }} - {{ user.username }} - {{ user.email }}</p>
+  {% endfor %}
+</div>
