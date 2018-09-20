@@ -7,21 +7,27 @@
 {% endblock style %}
 
 {% block content %}
+{% if projects != [] %}
 <div class="row">
   <div class="col">
     {% include 'sections/projectform.html' %}
   </div>
 </div>
+{% endif %}
+{% if blogs != [] %}
 <div class="row">
   <div class="col">
     {% include 'sections/blogform.html' %}
   </div>
 </div>
+{% endif %}
+{% if reviews != [] %}
 <div class="row">
   <div class="col">
     {% include 'sections/reviewform.html' %}
   </div>
 </div>
+{% endif %}
 <div class="row">
   <div class="col">
     {% include 'sections/userlist.html' %}
@@ -33,6 +39,8 @@
 {{ super() }}
 {{ script('managepagination.js') }}
 <script>
+  var $content = [];
+  {% if projects != [] %}
   var $projects = [];
   {% for project in projects %}
   var $project{{ project.id }} = [
@@ -44,7 +52,10 @@
   ];
   $projects.push($project{{ project.id }});
   {% endfor %}
+  if ($projects !== 0) { $content.push($projects) };
+  {% endif %}
 
+  {% if blogs != [] %}
   var $blogs = [];
   {% for blog in blogs %}
   var $blog{{ blog.id }} = [
@@ -56,7 +67,10 @@
   ];
   $blogs.push($blog{{ blog.id }});
   {% endfor %}
+  if ($blogs !== 0) { $content.push($blogs) };
+  {% endif %}
 
+  {% if reviews != [] %}
   var $reviews = [];
   {% for review in reviews %}
   var $review{{ review.id }} = [
@@ -68,9 +82,9 @@
   ];
   $reviews.push($review{{ review.id }});
   {% endfor %}
+  if ($reviews !== 0) { $content.push($reviews) };
+  {% endif %}
 
-
-  var $content = [$projects, $blogs, $reviews];
 </script>
 {{ script('editfill.js') }}
 {% endblock script %}
