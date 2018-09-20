@@ -21,62 +21,71 @@ import feedparser
 @app.route('/index')
 # define function 'index'
 def index():
+    title = "Home"
+    footer = "FrankieBaffa.com was made using the Flask Micro-Framework for Python"
     projects = Project.query.order_by(Project.id.desc()).limit(5).all()
     blog = Blog.query.order_by(Blog.id.desc()).limit(5).all()
     reviews = Review.query.order_by(Review.id.desc()).limit(5).all()
     pagetype = "top"
-    return render_template('pages/index.html', projects=projects,
-            blog=blog, reviews=reviews, pagetype=pagetype)
+    return render_template('pages/index.html', projects=projects, title=title,
+            blog=blog, reviews=reviews, pagetype=pagetype, footer=footer)
 
 @app.route('/blog/<post>', methods=['GET'])
 def blogpost(post):
     blog = Blog.query.filter(Blog.id == post).first()
     title = blog.title
+    footer = ContentPostFooter()
     pagetype = "single"
     back = url_for('blog') + '#blog-container-' + str(post)
-    return render_template("pages/blog.html", title=title, blog=blog, pagetype=pagetype,
-            back=back)
+    return render_template("pages/blog.html", title=title, footer=footer,
+            blog=blog, pagetype=pagetype, back=back)
 
 @app.route('/blog')
 def blog():
     title = "Blogs"
+    footer = ContentFooter()
     blog = Blog.query.order_by(Blog.id.desc()).all()
     pagetype = "all"
-    return render_template("pages/blog.html", title=title, blog=blog, pagetype=pagetype)
+    return render_template("pages/blog.html", title=title, footer=footer,
+            blog=blog, pagetype=pagetype)
 
 @app.route('/projects/<post>', methods=['GET'])
 def projectpost(post):
     pagetype = "single"
     project = Project.query.filter(Project.id == post).first()
     title = project.title
+    footer = ContentPostFooter()
     back = url_for('projects') + '#project-container-' + str(post)
-    return render_template("pages/projects.html", title=title, project=project,
-            pagetype=pagetype, back=back)
+    return render_template("pages/projects.html", title=title, footer=footer,
+            project=project, pagetype=pagetype, back=back)
 
 @app.route('/projects')
 def projects():
     title = "Projects"
+    footer = ContentFooter()
     projects = Project.query.order_by(Project.id.desc()).all()
     pagetype = "all"
-    return render_template("pages/projects.html", title=title, projects=projects,
-            pagetype=pagetype)
+    return render_template("pages/projects.html", title=title, footer=footer,
+            projects=projects, pagetype=pagetype)
 
 @app.route('/reviews')
 def reviews():
     title = "Reviews"
+    footer = ContentFooter()
     reviews = Review.query.order_by(Review.id.desc()).all()
     pagetype = "all"
-    return render_template("pages/reviews.html", title=title, reviews=reviews,
-            pagetype=pagetype)
+    return render_template("pages/reviews.html", title=title, footer=footer,
+            reviews=reviews, pagetype=pagetype)
 
 @app.route('/reviews/<post>', methods=['GET'])
 def reviewpost(post):
     pagetype = "single"
     review = Review.query.filter(Review.id == post).first()
     title = review.title
+    footer = ContentPostFooter()
     back = url_for('reviews') + '#review-container-' + str(post)
-    return render_template("pages/reviews.html", title=title, review=review,
-            pagetype=pagetype, back=back)
+    return render_template("pages/reviews.html", title=title, footer=footer,
+            review=review, pagetype=pagetype, back=back)
 
 
 ## create route 'news' at '/news'
@@ -94,6 +103,7 @@ def reviewpost(post):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     title = "Login"
+    footer = "This unlinked page is the login form, used to access the CMS."
     form = LoginForm()
     if current_user.is_authenticated:
         return redirect(url_for('manage'))
@@ -105,17 +115,20 @@ def login():
             return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('manage'))
-    return render_template('pages/login.html', title=title, form=form)
+    return render_template('pages/login.html', title=title, form=form,
+            footer=footer)
 
 # create route to contact method
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     title = "Contact"
+    footer = "Forms are created using WTForms combined with Bootstrap 4 classes."
     mail = Mail()
     form = ContactForm()
     if request.method == 'POST':
         if form.validate() == False:
-            return render_template('pages/contact.html', title=title, form=form)
+            return render_template('pages/contact.html', title=title, footer=footer,
+                    form=form)
         else:
             msg = Message(form.subject.data, sender=app.config['MAIL_USERNAME'],
                     recipients=[app.config['CONTACT_EMAIL']])
@@ -128,7 +141,8 @@ def contact():
             mail.send(confirm)
             return redirect(url_for('contact'))
     elif request.method == 'GET':
-        return render_template('pages/contact.html', title=title, form=form)
+        return render_template('pages/contact.html', title=title, footer=footer,
+                form=form)
 
 #=======================================#
 #       All below methods must          #
@@ -141,13 +155,16 @@ def contact():
 @login_required
 def manage():
     title = "Manage Content"
+    footer = "These forms are used to create new objects within the SQLite3 database and to edit existing objects."
     projects = Project.query.all()
     blogs = Blog.query.all()
     reviews = Review.query.all()
     content = [projects, blogs, reviews]
+    users = User.query.all()
     form = ContentForm()
     return render_template('pages/manage.html', title=title, content=content,
-            form=form, projects=projects, blogs=blogs, reviews=reviews)
+            form=form, projects=projects, blogs=blogs, reviews=reviews,
+            users=users, footer=footer)
 
 @app.route('/manage/createproject', methods=['POST'])
 @login_required
@@ -263,3 +280,10 @@ I will attempt to get back to you as soon as possible!
     """.format(name)
     return message
 
+def ContentFooter():
+    footer = "Content pages are dynamically generated using a SQLite3 database queried by SQLAlchemy. (Also, notice the dynamic navbar)"
+    return footer
+
+def ContentPostFooter():
+    footer = "Individual content post pages are passed into a dynamic route in view which fills the reusable template."
+    return footer
