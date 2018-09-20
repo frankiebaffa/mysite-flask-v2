@@ -61,11 +61,9 @@ p, a, span {
 }
 .main-header {
   margin: 0px 0px 10px 0px;
-  transform: translateZ(20px); 
 }
 .sub-header {
   text-align: center;
-  transform: translateZ(20px);
 }
 .text-center {
   text-align: center;
