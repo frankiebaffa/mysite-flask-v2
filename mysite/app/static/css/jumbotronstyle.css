@@ -8,8 +8,8 @@
   margin: -35px 0px 10px 0px;
 }
 .jumbotron-title {
-  margin: -35px 0px 10px 0px;
-  font-size: 20px;
+  margin: -15px 0px 20px 0px;
+  font-size: 30px;
 }
 .jumbotron-sub-title {
   font-size: 18px;
@@ -35,11 +35,9 @@
 .article-container {
   display: none;
 }
-/* ================= *
- * MEDIA BREAKPOINTS *
- * ================= */
-@media (max-width: 575px) {
-    .jumbotron-header {
-        margin: 0px 0 10px 0px;
-    }
+
+@media(max-width: 575px) {
+  .jumbotron-header {
+    margin-top: 0px;
+  }
 }
