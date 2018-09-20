@@ -42,45 +42,46 @@
   </li>
 {%- endmacro %}
 
+<div class="container">
+  <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-darkest">
+    <a class="navbar-brand fg-lightest hover-bg-darkest tran-fast hover-fg-dark" href="#">
+        F. Baffa
+    </a>
+    <button class="navbar-toggler fg-lightest hover-bg-darkest hover-fg-lighter tran-fast" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {{ navitem(url_for('index'), "Home") }}
+        {% if title != 'Projects' %}
+        {{ navitem(url_for('projects'), "Projects") }}
+        {% elif title == 'Projects' %}
+        {{ dynamicdrop("Project List", "#", "#project-container-", projects) }}
+        {% endif %}
+        {% if title != 'Blogs' %}
+        {{ navitem(url_for('blog'), "Blog") }}
+        {% elif title == 'Blogs' %}
+        {{ dynamicdrop("Blog List", "#", "#blog-container-", blog) }}
+        {% endif %}
+        {% if title != 'Reviews' %}
+        {{ navitem(url_for('reviews'), "Reviews") }}
+        {% elif title == 'Reviews' %}
+        {{ dynamicdrop("Review List", "#", "#review-container-", reviews) }}
+        {% endif %}
+        {# navitem(url_for('about'), "About") #}
+        {{ navitem(url_for('contact'), "Contact") }}
+        {% if not current_user.is_anonymous %}
+        {{ navitem(url_for('manage'), "Manage") }}
+        {{ navitem(url_for('logout'), "Logout") }}
+        {% endif %}
 
-<nav class="navbar navbar-expand-md navbar-dark bg-darkest">
-  <a class="navbar-brand fg-lightest hover-bg-darkest tran-fast hover-fg-dark" href="#">
-      F. Baffa
-  </a>
-  <button class="navbar-toggler fg-lightest hover-bg-darkest hover-fg-lighter tran-fast" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      {{ navitem(url_for('index'), "Home") }}
-      {% if title != 'Projects' %}
-      {{ navitem(url_for('projects'), "Projects") }}
-      {% elif title == 'Projects' %}
-      {{ dynamicdrop("Project List", "#", "#project-container-", projects) }}
-      {% endif %}
-      {% if title != 'Blogs' %}
-      {{ navitem(url_for('blog'), "Blog") }}
-      {% elif title == 'Blogs' %}
-      {{ dynamicdrop("Blog List", "#", "#blog-container-", blog) }}
-      {% endif %}
-      {% if title != 'Reviews' %}
-      {{ navitem(url_for('reviews'), "Reviews") }}
-      {% elif title == 'Reviews' %}
-      {{ dynamicdrop("Review List", "#", "#review-container-", reviews) }}
-      {% endif %}
-      {# navitem(url_for('about'), "About") #}
-      {{ navitem(url_for('contact'), "Contact") }}
-      {% if not current_user.is_anonymous %}
-      {{ navitem(url_for('manage'), "Manage") }}
-      {{ navitem(url_for('logout'), "Logout") }}
-      {% endif %}
+        {# EXAMPLE OF NAV DROPDOWN MACRO
+        {% set navdropdown = [(url_for('index'), 'Drop 1'), ('https://soundcloud.com', 'Soundcloud')] %}
+        {{ navdrop("#", "Dropdown", navdropdown) }}
+        #}
 
-      {# EXAMPLE OF NAV DROPDOWN MACRO
-      {% set navdropdown = [(url_for('index'), 'Drop 1'), ('https://soundcloud.com', 'Soundcloud')] %}
-      {{ navdrop("#", "Dropdown", navdropdown) }}
-      #}
-
-    </ul>
-  </div>
-</nav>
+      </ul>
+    </div>
+  </nav>
+</div>
 <div class="nav-spacer"></div>
