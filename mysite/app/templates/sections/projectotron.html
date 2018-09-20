@@ -17,9 +17,11 @@
       {{ project.timestamp|datetime('full') }}
     </h3>
     <p class="jumbotron-p fg-lighter p-title text-center">{{ project.title }}</p>
-    <p class="jumbotron-p fg-light">{{ project.body|string|truncate(280) }}</p>
-    <a class="read-more fg-lightest hover-fg-light tran-fast"
+    <p class="jumbotron-p fg-light">
+      {{ project.body|string|truncate(280) }}
+      <a class="read-more fg-lightest hover-fg-light tran-fast"
               href="{{ url_for('projectpost', post=project.id) }}">Read more</a>
+    </p>
   </div>
   {% endfor %}
 </div>
@@ -31,6 +33,14 @@
     <h3 class="jumbotron-sub-title fg-lighter text-center">
       {{ project.timestamp|datetime('full') }}
     </h3>
+    <p class="jumbotron-p fg-lightest p-title text-center">
+      <a href="{{ project.repo }}" target="_blank" style="margin-right: 5px;">
+        Repository
+      </a>
+      <a href="{{ project.url }}" target="_blank" style="margin-left: 5px">
+        Link
+      </a>
+    </p>
     <p class="jumbotron-p fg-light">{{ project.body|string }}</p>
     <a class="read-more fg-lightest hover-fg-light tran-fast"
               href="{{ back|string }}">Back to projects...</a>
