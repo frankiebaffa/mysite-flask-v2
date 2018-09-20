@@ -9,7 +9,16 @@ $(document).ready(function fillOnReady() {
   
   // assign all field categories to variable
   //   append with additional content categories if neccessary
-  var $fields = [$projectFields, $blogFields, $reviewFields];
+  var $fields = [];
+  if ($projectFields.length !== 0) {
+    $fields.push($projectFields)
+  };
+  if ($blogFields.length !== 0) {
+    $fields.push($blogFields)
+  };
+  if ($reviewFields.length !== 0) {
+    $fields.push($reviewFields)
+  };
 
   // for each field category in $fields
   $($fields).each(function eachFieldCategory(i, category) {
