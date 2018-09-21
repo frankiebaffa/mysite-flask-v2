@@ -3,7 +3,7 @@
 from flask_wtf import FlaskForm
 # get fields for forms from wtforms
 from wtforms import StringField, PasswordField, BooleanField
-from wtforms import SubmitField, TextAreaField
+from wtforms import SubmitField, TextAreaField, IntegerField
 # get validator 'DataRequired' so that form fields can
 #  require that they not be empty
 from wtforms.validators import DataRequired
@@ -41,4 +41,13 @@ class ContentForm(FlaskForm):
     # repo string field
     repo = StringField('Repository URL', validators=[DataRequired()])
     # submit submit field
+    submit = SubmitField('Submit')
+
+class MusicForm(FlaskForm):
+    artist = StringField('Artist', validators=[DataRequired()])
+    album = StringField('Album', validators=[DataRequired()])
+    song0 = StringField('Song', validators=[DataRequired()])
+    trackno0 = IntegerField('Track Number', validators=[DataRequired()])
+    sc_api0 = IntegerField('SoundCloud API #', validators=[DataRequired()])
+    descript0 = StringField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit')
