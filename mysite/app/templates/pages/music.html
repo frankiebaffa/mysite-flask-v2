@@ -22,50 +22,5 @@
 
 {% block script %}
 {{ super() }}
-  <script>
-    $(document).ready(function createSongArray() {
-      var $songs = [];
-      {% for song in songs %}
-      var $song{{ song.id }} = "{{ player(song.sc_api) }}";
-      $songs.push($song{{ song.id }});
-      {% endfor %}
-      var links = $('.track-link');
-      $('#track-container').append($songs[0]);
-      $(links[0]).removeClass('fg-light').addClass('fg-lighter');
-      var classReplace;
-      $(links).each(function eachTrackLink(i, link) {
-        $(link).click(function linkOnClick() {
-          $('#track-container').empty();
-          $('#track-container').append($songs[i]);
-          $(this).addClass('fg-lighter')
-          if ($(this).hasClass('fg-light')) {
-            $(this).removeClass('fg-light');
-            classReplace = 'fg-light';
-          };
-          if ($(this).hasClass('fg-lighter')) {
-            $(this).removeClass('fg-lighter');
-            classReplace = 'fg-lighter'
-          };
-          $(links).each(function linkRemoveColors(j, item) {
-            if ($(item).hasClass('fg-lighter')) {
-              $(item).removeClass('fg-lighter').addClass('fg-light');
-            };
-          });
-        });
-        $(link).hover(function eachTrackLinkHoverOn() {
-          $(this).addClass('fg-lightest');
-          if ($(this).hasClass('fg-light')) {
-            $(this).removeClass('fg-light');
-            classReplace = 'fg-light';
-          };
-          if ($(this).hasClass('fg-lighter')) {
-            $(this).removeClass('fg-lighter');
-            classReplace = 'fg-lighter'
-          };
-        }, function eachTrackLinkHoverOff() {
-          $(this).removeClass('fg-lightest').addClass(classReplace);
-        });
-      });
-    });
-  </script>
+{% include 'js/songotronArray.html' %}
 {% endblock script %}

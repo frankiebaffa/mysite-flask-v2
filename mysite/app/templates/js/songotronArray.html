@@ -1,0 +1,27 @@
+<script>
+  $(document).ready(function createSongArray() {
+    var $songs = [];
+    {% for song in songs %}
+    var $song{{ song.id }} = "{{ player(song.sc_api) }}";
+    $songs.push($song{{ song.id }});
+    {% endfor %}
+    var links = $('.track-link');
+    $('#track-container').append($songs[0]);
+    $(links[0]).removeClass('bg-darker fg-lighter').addClass('bg-lightest fg-darker');
+    var classReplace;
+    $(links).each(function eachTrackLink(i, link) {
+      $(link).click(function linkOnClick() {
+        $(links).each(function linkRemoveColors(j, item) {
+          if ($(item).hasClass('bg-lightest fg-darker')) {
+            $(item).removeClass('bg-lightest fg-darker').addClass('bg-darker fg-lighter');
+          };
+        });
+        $('#track-container').empty();
+        $('#track-container').append($songs[i]);
+        $(this).addClass('bg-lightest fg-darker');
+        $(this).removeClass('bg-darker fg-lighter');
+      });
+    });
+  });
+</script>
+
