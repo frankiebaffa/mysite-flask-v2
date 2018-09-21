@@ -28,13 +28,16 @@
   <form class="manage-form edit-form blog-form" action="{{ url_for('editblog') }}" method="post" id="editProjectForm">
     <div class="form-group">
       <label for="selectBlog" class="fg-lighter">Select Blog</label>
-      <select class="form-control bg-lighter fg-darkest" name="id" id="selectBlog">
+      <select class="form-control bg-lighter fg-darkest" name="select" id="selectBlog">
         {% for blog in blogs %}
         <option value={{ loop.index }}>{{ blog.timestamp|datetime('full') }}</option>
         {% endfor %}
       </select>
     </div>
     {{ form.hidden_tag() }}
+    <div class="form-group">
+      <input class="edit-field blog-edit" id="editBlogId" name="id" value="1" style="display: none;" />
+    </div>
     <div class="form-group">
       {{ form.title.label(for="newInputTitle", class_="fg-lighter") }}<br>
       {{ form.title(class_="form-control bg-lighter fg-darkest edit-field blog-edit", id="newInputTitle", placeholder="Title") }}

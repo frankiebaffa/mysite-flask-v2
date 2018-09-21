@@ -32,13 +32,16 @@
   <form class="manage-form edit-form review-form" action="{{ url_for('editreview') }}" method="post" id="editReviewForm">
     <div class="form-group">
       <label for="selectReview" class="fg-lighter">Select Review</label>
-      <select class="form-control bg-lighter fg-darkest" name="id" id="selectReview">
+      <select class="form-control bg-lighter fg-darkest" name="select" id="selectReview">
         {% for review in reviews %}
         <option value={{ loop.index }}>{{ review.timestamp|datetime('full') }}</option>
         {% endfor %}
       </select>
     </div>
     {{ form.hidden_tag() }}
+    <div class="form-group">
+      <input class="edit-field review-edit" id="editReviewId" name="id" style="display: none;" />
+    </div>
     <div class="form-group">
       {{ form.title.label(for="newInputTitle", class_="fg-lighter") }}<br>
       {{ form.title(class_="form-control bg-lighter fg-darkest edit-field review-edit", id="newInputTitle", placeholder="Title") }}

@@ -50,13 +50,16 @@
   <form class="manage-form edit-form music-form" action="{{ url_for('editmusic') }}" method="post" id="editMusicForm">
     <div class="form-group">
       <label for="selectMusic" class="fg-lighter">Select Music</label>
-      <select class="form-control bg-lighter fg-darkest" name="id" id="selectMusic">
+      <select class="form-control bg-lighter fg-darkest" name="select" id="selectMusic">
         {% for song in songs %}
         <option value={{ loop.index }}>{{ song.artist }} | {{ song.song }}</option>
         {% endfor %}
       </select>
     </div>
     {{ musicform.hidden_tag() }}
+    <div class="form-group">
+      <input class="edit-field music-edit" id="editMusicId" name="id" value="1" style="display: none;" />
+    </div>
     <div class="form-group">
       {{ musicform.artist.label(for="newInputArtist", class_="fg-lighter") }}<br>
       {{ musicform.artist(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputArtist", placeholder="Artist") }}
