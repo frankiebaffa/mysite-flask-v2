@@ -28,6 +28,13 @@
   </div>
 </div>
 {% endif %}
+{% if songs != [] %}
+<div class="row">
+  <div class="col">
+    {% include 'sections/musicform.html' %}
+  </div>
+</div>
+{% endif %}
 <div class="row">
   <div class="col">
     {% include 'sections/userlist.html' %}
@@ -40,4 +47,27 @@
 {{ script('managepagination.js') }}
 {% include 'js/contentarray.html' %}
 {{ script('editfill.js') }}
+  <script>
+    $(document).ready(function onReadySongContainer() {
+      $songcontainer = $('#song-container').html();
+      $('#song-add').click(function appendSongContainerClick() {
+        $('#song-container').append($songcontainer);
+        var counter = parseInt($('#song-add-counter').val()) + 1;
+        $('#song-add-counter').val(counter);
+        var lastsongcontainer = $('#song-container').children();
+        var lastsong = $(lastsongcontainer[lastsongcontainer.length - 4]).children()
+        $(lastsong[2]).attr("id", "inputSong" + counter);
+        $(lastsong[2]).attr("name", "song" + counter);
+        var lasttrackno = $(lastsongcontainer[lastsongcontainer.length - 3]).children()
+        $(lasttrackno[2]).attr("id", "inputTrackNo" + counter);
+        $(lasttrackno[2]).attr("name", "trackno" + counter);
+        var lastapi = $(lastsongcontainer[lastsongcontainer.length - 2]).children()
+        $(lastapi[2]).attr("id", "inputScApi" + counter);
+        $(lastapi[2]).attr("name", "sc_api" + counter);
+        var lastdescript = $(lastsongcontainer[lastsongcontainer.length - 1]).children()
+        $(lastdescript[2]).attr("id", "inputDescript" + counter);
+        $(lastdescript[2]).attr("name", "descript" + counter);
+      });
+    });
+  </script>
 {% endblock script %}
