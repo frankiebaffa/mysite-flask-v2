@@ -5,6 +5,7 @@ $(document).ready(function fillOnReady() {
   var $blogFields = $('.blog-edit');
   // assign all review-edit fields to variable
   var $reviewFields = $('.review-edit');
+  var $musicFields = $('.music-edit');
   // add other content types here
   
   // assign all field categories to variable
@@ -18,6 +19,9 @@ $(document).ready(function fillOnReady() {
   };
   if ($reviewFields.length !== 0) {
     $fields.push($reviewFields)
+  };
+  if ($musicFields.length !== 0) {
+    $fields.push($musicFields)
   };
 
   // for each field category in $fields

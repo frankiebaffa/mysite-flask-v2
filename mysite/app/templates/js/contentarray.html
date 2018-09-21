@@ -44,5 +44,23 @@
   {% endfor %}
   if ($reviews !== 0) { $content.push($reviews) };
   {% endif %}
+
+  {% if songs != [] %}
+  var $songs = [];
+  {% for song in songs %}
+  var $song{{ song.id }} = [
+    {{ song.id }},
+    "{{ song.artist }}",
+    "{{ song.album }}",
+    "{{ song.song }}",
+    "{{ song.trackno }}",
+    "{{ song.sc_api }}",
+    "{{ song.descript }}"
+  ];
+  $songs.push($song{{ song.id }});
+  {% endfor %}
+  if ($songs !== 0) { $content.push($songs) };
+  {% endif %}
+
 </script>
 
