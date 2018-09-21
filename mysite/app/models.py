@@ -97,3 +97,15 @@ class Review(db.Model):
     # When called...
     def __repr__(self):
         return '<Review {}>'.format(self.title)
+
+class Music(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    artist = db.Column(db.String(100))
+    album = db.Column(db.String(100))
+    song = db.Column(db.String(100))
+    trackno = db.Column(db.Integer)
+    sc_api = db.Column(db.Integer)
+    descript = db.Column(db.String(1000))
+
+    def __repr__(self):
+        return '<{}|{}|{}'.format(self.artist, self.album, self.song)
