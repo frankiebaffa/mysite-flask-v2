@@ -39,7 +39,11 @@ def format_datetime(value, format='medium'):
         format="EE dd.MM.y HH:mm"
     return babel.dates.format_datetime(value, format)
 
+def format_hyphens(value):
+    return value.replace('-', ' ')
+
 app.jinja_env.filters['datetime'] = format_datetime
+app.jinja_env.filters['hyphens'] = format_hyphens
 
 
 # get routes for application
