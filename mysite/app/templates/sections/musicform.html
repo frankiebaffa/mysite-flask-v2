@@ -52,7 +52,7 @@
       <label for="selectMusic" class="fg-lighter">Select Music</label>
       <select class="form-control bg-lighter fg-darkest" name="id" id="selectMusic">
         {% for song in songs %}
-        <option value={{ song.id }}>{{ song.artist }}|{{ song.song }}</option>
+        <option value={{ loop.index }}>{{ song.artist }} | {{ song.song }}</option>
         {% endfor %}
       </select>
     </div>

@@ -34,7 +34,7 @@
       <label for="selectReview" class="fg-lighter">Select Review</label>
       <select class="form-control bg-lighter fg-darkest" name="id" id="selectReview">
         {% for review in reviews %}
-        <option value={{ review.id }}>{{ review.timestamp|datetime('full') }}</option>
+        <option value={{ loop.index }}>{{ review.timestamp|datetime('full') }}</option>
         {% endfor %}
       </select>
     </div>

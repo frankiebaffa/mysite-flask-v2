@@ -30,7 +30,7 @@
       <label for="selectBlog" class="fg-lighter">Select Blog</label>
       <select class="form-control bg-lighter fg-darkest" name="id" id="selectBlog">
         {% for blog in blogs %}
-        <option value={{ blog.id }}>{{ blog.timestamp|datetime('full') }}</option>
+        <option value={{ loop.index }}>{{ blog.timestamp|datetime('full') }}</option>
         {% endfor %}
       </select>
     </div>

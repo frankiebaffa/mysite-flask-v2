@@ -38,7 +38,7 @@
       <label for="selectProject" class="fg-lighter">Select Project</label>
       <select class="form-control bg-lighter fg-darkest" name="id" id="selectProject">
         {% for project in projects %}
-        <option value={{ project.id }}>{{ project.timestamp|datetime('full') }}</option>
+        <option value={{ loop.index }}>{{ project.timestamp|datetime('full') }}</option>
         {% endfor %}
       </select>
     </div>
