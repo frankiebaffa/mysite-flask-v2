@@ -1,0 +1,17 @@
+<div class="jumbotron bg-darker tilt-border-darkest">
+  <h1 class="main-header jumbotron-header fg-lightest text-center">
+    {{ album }}
+  </h1>
+  <p class="p-title fg-lightest text-center">{{ header }}</p>
+  <ul class="pagination">
+  {% for song in songs %}
+    <li class="page-item jumbotron-item blog-item">
+      <a class="page-link jumbotron-link track-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast"
+                id="song{{ song.id }}">{{ loop.index }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+  <div id="track-container"></div>
+</div>

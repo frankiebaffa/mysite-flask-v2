@@ -1,0 +1,86 @@
+<div class="form-container music-form-container bg-darker tilt-border-darkest">
+  <h1 class="main-header fg-lightest text-center">Music</h1>
+  <ul class="pagination">
+    <li class="page-item jumbotron-item">
+      <a class="page-link jumbotron-link blog-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast create-button music-button" id="createMusicButton">Create</a>
+    </li>
+    <li class="page-item jumbotron-item">
+      <a class="page-link jumbotron-link blog-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast edit-button music-button" id="editMusicButton">Edit</a>
+    </li>
+  </ul>
+  <p>{{ user }}</p>
+  <form class="manage-form create-form music-form" action="{{ url_for('createmusic') }}" method="post" id="createMusicForm">
+    {{ musicform.hidden_tag() }}
+    <div class="form-group">
+      {{ musicform.artist.label(for="inputArtist", class_="fg-lighter") }}<br>
+      {{ musicform.artist(class_="form-control bg-lighter fg-darkest", id="inputArtist", placeholder="Artist") }}
+    </div>
+    <div class="form-group">
+      {{ musicform.album.label(for="inputAlbum", class_="fg-lighter") }}<br>
+      {{ musicform.album(class_="form-control bg-lighter fg-darkest", id="inputAlbum", placeholder="Album") }}
+    </div>
+    <div class="form-group" style="display: none">
+      <input id="song-add-counter" name="song-add-counter" value="0" />
+    </div>
+    <div id="song-container">
+      <div class="form-group">
+        {{ musicform.song0.label(for="inputSong", class_="fg-lighter") }}<br>
+        {{ musicform.song0(class_="form-control bg-lighter fg-darkest", id="inputSong0", placeholder="Song") }}
+      </div>
+      <div class="form-group">
+        {{ musicform.trackno0.label(for="inputTrackNo", class_="fg-lighter") }}<br>
+        {{ musicform.trackno0(class_="form-control bg-lighter fg-darkest", id="inputTrackNo0", placeholder="Track Number") }}
+      </div>
+      <div class="form-group">
+        {{ musicform.sc_api0.label(for="inputScApi", class_="fg-lighter") }}<br>
+        {{ musicform.sc_api0(class_="form-control bg-lighter fg-darkest", id="inputScApi0", placeholder="SoundCloud API #") }}
+      </div>
+      <div class="form-group">
+        {{ musicform.descript0.label(for="inputDescript", class_="fg-lighter") }}<br>
+        {{ musicform.descript0(class_="form-control bg-lighter fg-darkest", id="inputDescript0", placeholder="Description") }}
+      </div>
+    </div>
+    <a class="fg-lighter text-center center" id="song-add">Add Song</a>
+    {{ musicform.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
+  </form>
+  <form class="manage-form edit-form music-form" action="{{ url_for('editmusic') }}" method="post" id="editMusicForm">
+    <div class="form-group">
+      <label for="selectMusic" class="fg-lighter">Select Music</label>
+      <select class="form-control bg-lighter fg-darkest" name="id" id="selectMusic">
+        {% for song in songs %}
+        <option value={{ song.id }}>{{ song.artist }}|{{ song.song }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {{ musicform.hidden_tag() }}
+    <div class="form-group">
+      {{ musicform.artist.label(for="newInputArtist", class_="fg-lighter") }}<br>
+      {{ musicform.artist(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputArtist", placeholder="Artist") }}
+    </div>
+    <div class="form-group">
+      {{ musicform.album.label(for="newInputAlbum", class_="fg-lighter") }}<br>
+      {{ musicform.album(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputAlbum", placeholder="Album") }}
+    </div>
+    <div class="form-group">
+      {{ musicform.trackno0.label(for="newInputTrackNo", class_="fg-lighter") }}<br>
+      {{ musicform.trackno0(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputTrackNo", placeholder="Track Number") }}
+    </div>
+    <div class="form-group">
+      {{ musicform.song0.label(for="newInputSong", class_="fg-lighter") }}<br>
+      {{ musicform.song0(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputSong", placeholder="Song") }}
+    </div>
+    <div class="form-group">
+      {{ musicform.sc_api0.label(for="newInputScApi", class_="fg-lighter") }}<br>
+      {{ musicform.sc_api0(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputScApi", placeholder="SoundCloud API #") }}
+    </div>
+    <div class="form-group">
+      {{ musicform.descript0.label(for="newInputDescript", class_="fg-lighter") }}<br>
+      {{ musicform.descript0(class_="form-control bg-lighter fg-darkest edit-field music-edit", id="newInputDescript", placeholder="Track Number") }}
+    </div>
+    {{ musicform.submit(class_="btn center hover-bg-darkest hover-fg-lightest bg-lightest fg-darkest manage-submit tran-fast") }}
+  </form>
+</div>
