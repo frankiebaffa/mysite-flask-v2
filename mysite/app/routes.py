@@ -148,9 +148,7 @@ def contact():
 @app.route('/music/<artist>/<album>')
 def music(artist, album):
     title = "Music"
-    artist = artist.replace('-', ' ')
-    album = album.replace('-', ' ')
-    songs = Music.query.filter(func.lower(Music.artist) == func.lower(artist)).filter(func.lower(Music.album) == func.lower(album)).order_by(Music.trackno.asc())
+    songs = Music.query.filter(func.lower(func.replace(Music.artist, ' ', '')) == func.lower(func.replace(artist, '-', ''))).filter(func.lower(func.replace(Music.album, ' ', '')) == func.lower(func.replace(album, '-', ''))).order_by(Music.trackno.asc()).all()
     header = (songs[0].artist).replace('-', ' ')
     album = (songs[0].album).replace('-', ' ')
     return render_template('pages/music.html', title=title, songs=songs, header=header, album=album)
@@ -281,14 +279,14 @@ def createmusic():
 @app.route('/manage/editmusic', methods=['POST'])
 @login_required
 def editmusic():
-    music_id = request.form.get("id")
+    music_id = int(request.form.get("id"))
     artist = request.form.get("artist")
     album = request.form.get("album")
     song = request.form.get("song0")
     trackno = request.form.get("trackno0")
     sc_api = request.form.get("sc_api0")
     descript = request.form.get("descript0")
-    music = Project.query.filter(Music.id==music_id).first()
+    music = Music.query.filter(Music.id==music_id).first()
     music.artist = artist
     music.album = album
     music.song = song
