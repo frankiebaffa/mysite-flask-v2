@@ -8,11 +8,12 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, login_required
 from flask_login import logout_user
 # from models import User for login query
-from app.models import User, Blog, Project, Review
+from app.models import User, Blog, Project, Review, Music
 # get forms from app/forms.py
-from app.forms import LoginForm, ContactForm, ContentForm
+from app.forms import LoginForm, ContactForm, ContentForm, MusicForm
 # get flask_mail for contact form
 from flask_mail import Message, Mail
+from sqlalchemy import func
 # feedparser for handling .rss feeds
 import feedparser
 
@@ -144,6 +145,16 @@ def contact():
         return render_template('pages/contact.html', title=title, footer=footer,
                 form=form)
 
+@app.route('/music/<artist>/<album>')
+def music(artist, album):
+    title = "Music"
+    artist = artist.replace('-', ' ')
+    album = album.replace('-', ' ')
+    songs = Music.query.filter(func.lower(Music.artist) == func.lower(artist)).filter(func.lower(Music.album) == func.lower(album)).order_by(Music.trackno.asc())
+    header = (songs[0].artist).replace('-', ' ')
+    album = (songs[0].album).replace('-', ' ')
+    return render_template('pages/music.html', title=title, songs=songs, header=header, album=album)
+
 #=======================================#
 #       All below methods must          #
 #          @login_required              #
@@ -159,12 +170,14 @@ def manage():
     projects = Project.query.all()
     blogs = Blog.query.all()
     reviews = Review.query.all()
-    content = [projects, blogs, reviews]
+    songs = Music.query.all()
+    content = [projects, blogs, reviews, songs]
     users = User.query.all()
     form = ContentForm()
+    musicform = MusicForm()
     return render_template('pages/manage.html', title=title, content=content,
-            form=form, projects=projects, blogs=blogs, reviews=reviews,
-            users=users, footer=footer)
+            form=form, musicform=musicform, projects=projects, blogs=blogs, reviews=reviews,
+            users=users, songs=songs, footer=footer)
 
 @app.route('/manage/createproject', methods=['POST'])
 @login_required
@@ -249,6 +262,42 @@ def editreview():
     db.session.commit()
     return redirect(url_for('manage'))
 
+@app.route('/manage/createmusic', methods=['POST'])
+@login_required
+def createmusic():
+    for i in range(int(request.form.get("song-add-counter")) + 1):
+        artist = request.form.get("artist")
+        album = request.form.get("album")
+        song = request.form.get("song" + str(i))
+        trackno = request.form.get("trackno" + str(i))
+        sc_api = request.form.get("sc_api" + str(i))
+        descript = request.form.get("descript" + str(i))
+        music = Music(artist=artist, album=album, song=song,trackno=trackno,
+                sc_api=sc_api, descript=descript)
+        db.session.add(music)
+        db.session.commit()
+    return redirect(url_for('manage'))
+
+@app.route('/manage/editmusic', methods=['POST'])
+@login_required
+def editmusic():
+    music_id = request.form.get("id")
+    artist = request.form.get("artist")
+    album = request.form.get("album")
+    song = request.form.get("song0")
+    trackno = request.form.get("trackno0")
+    sc_api = request.form.get("sc_api0")
+    descript = request.form.get("descript0")
+    music = Project.query.filter(Music.id==music_id).first()
+    music.artist = artist
+    music.album = album
+    music.song = song
+    music.trackno = trackno
+    music.sc_api = sc_api
+    music.descript = descript
+    db.session.add(music)
+    db.session.commit()
+    return redirect(url_for('manage'))
 
 # create route to logout method
 # only allow if user is logged in
