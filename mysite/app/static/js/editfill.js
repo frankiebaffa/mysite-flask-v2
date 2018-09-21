@@ -29,7 +29,7 @@ $(document).ready(function fillOnReady() {
     // for each field in each field category
     $(category).each(function eachField(j, field) {
       // populate field with the first post in the corresponding category
-      $(field).val($content[i][0][j+1]);
+      $(field).val($content[i][0][j]);
     });
   });
 
@@ -46,7 +46,7 @@ $(document).ready(function fillOnReady() {
         // populate the field with the content within
         // the corresponding category beginning at index of
         // this each index + 1
-        $(field).val($content[i][index][j+1]);
+        $(field).val($content[i][index][j]);
       });
     });
   });
