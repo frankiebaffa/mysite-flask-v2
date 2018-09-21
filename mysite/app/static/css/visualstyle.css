@@ -39,6 +39,9 @@ body {
 .footer-p {
   margin-top: 1px;
 }
+.top-margin-sm {
+  margin-top: 15px;
+}
 
 @media (min-width: 800px) {
   footer {
