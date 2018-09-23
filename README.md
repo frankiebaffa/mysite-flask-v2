@@ -1,4 +1,4 @@
-# mysite-flask-v2  
+# Mysite Flask V2
 These are the source files for the second iteration of my website hosted on
 pythonanywhere.com. It is built to be a portfolio site for all of the projects
 that I am currently working on: software, music, etc. The design of the website
