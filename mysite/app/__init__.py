@@ -13,6 +13,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 # Import Mail from flask_mail
 from flask_mail import Mail
+from flaskext.markdown import Markdown
 
 # set application name as name
 app = Flask(__name__)
@@ -30,6 +31,8 @@ MailConfig(app)
 
 mail = Mail()
 mail.init_app(app)
+
+Markdown(app)
 
 # create a jinja filter for datetime using babel
 def format_datetime(value, format='medium'):
