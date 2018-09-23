@@ -5,7 +5,7 @@ that I am currently working on: software, music, etc. The design of the website
 is built for a single user or a pre-added set of users who would add content to
 the page through the lite CMS.  
   
-##Installation / Development Environment
+## Installation / Development Environment
 ```
 git clone https://github.com/frankiebaffa/mysite-flask-v2
 cd mysite-flask-v2
