@@ -7,6 +7,7 @@
     {% endfor %}
     var links = $('.track-link');
     $('#track-container').append($songs[0]);
+    $('#descript-container-1').show();
     $(links[0]).removeClass('bg-darker fg-lighter').addClass('bg-lightest fg-darker');
     var classReplace;
     $(links).each(function eachTrackLink(i, link) {
@@ -18,6 +19,10 @@
         });
         $('#track-container').empty();
         $('#track-container').append($songs[i]);
+        $('.markup-container').each(function eachDescript(index, descript) {
+          $(this).hide();
+        });
+        $('#descript-container-' + String([i+1])).show();
         $(this).addClass('bg-lightest fg-darker');
         $(this).removeClass('bg-darker fg-lighter');
       });
