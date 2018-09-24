@@ -35,7 +35,7 @@ class ContentForm(FlaskForm):
     # title string field
     title = StringField('Title', validators=[DataRequired()])
     # body text area field
-    body = TextAreaField('Body', validators=[DataRequired()])
+    body = TextAreaField('Enter your body in Markdown', validators=[DataRequired()])
     # url string field
     url = StringField('Content URL', validators=[DataRequired()])
     # repo string field
@@ -49,5 +49,5 @@ class MusicForm(FlaskForm):
     song0 = StringField('Song', validators=[DataRequired()])
     trackno0 = IntegerField('Track Number', validators=[DataRequired()])
     sc_api0 = IntegerField('SoundCloud API #', validators=[DataRequired()])
-    descript0 = StringField('Description', validators=[DataRequired()])
+    descript0 = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit')
