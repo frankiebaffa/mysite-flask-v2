@@ -14,6 +14,7 @@ from flask_login import LoginManager
 # Import Mail from flask_mail
 from flask_mail import Mail
 from flaskext.markdown import Markdown
+import re
 
 # set application name as name
 app = Flask(__name__)
@@ -45,8 +46,12 @@ def format_datetime(value, format='medium'):
 def format_hyphens(value):
     return value.replace('-', ' ')
 
+def markup_strip(value):
+    return re.sub(r'<.+?>', '', value)
+
 app.jinja_env.filters['datetime'] = format_datetime
 app.jinja_env.filters['hyphens'] = format_hyphens
+app.jinja_env.filters['markstrip'] = markup_strip
 
 
 # get routes for application
