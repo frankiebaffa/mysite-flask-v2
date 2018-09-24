@@ -14,6 +14,7 @@ from app.forms import LoginForm, ContactForm, ContentForm, MusicForm
 # get flask_mail for contact form
 from flask_mail import Message, Mail
 from sqlalchemy import func
+import markdown2
 # feedparser for handling .rss feeds
 import feedparser
 
@@ -177,11 +178,15 @@ def manage():
             form=form, musicform=musicform, projects=projects, blogs=blogs, reviews=reviews,
             users=users, songs=songs, footer=footer)
 
+mdown = markdown2.markdown
+
 @app.route('/manage/createproject', methods=['POST'])
 @login_required
 def createproject():
     title = request.form.get("title")
     body = request.form.get("body")
+    body = mdown(body)
+    body = body.replace("\n", "")
     url = request.form.get("url")
     repo = request.form.get("repo")
     project = Project(title=title, body=body, url=url, repo=repo,
@@ -196,6 +201,9 @@ def editproject():
     project_id = request.form.get("id")
     title = request.form.get("title")
     body = request.form.get("body")
+    body = request.form.get("body")
+    body = mdown(body)
+    body = body.replace("\n", "")
     url = request.form.get("url")
     repo = request.form.get("repo")
     project = Project.query.filter(Project.id==project_id).first()
@@ -212,6 +220,8 @@ def editproject():
 def createblog():
     title = request.form.get("title")
     body = request.form.get("body")
+    body = mdown(body)
+    body = body.replace("\n", "")
     blog = Blog(title=title, body=body, user_id=current_user.id)
     db.session.add(blog)
     db.session.commit()
@@ -223,6 +233,8 @@ def editblog():
     blog_id = request.form.get("id")
     title = request.form.get("title")
     body = request.form.get("body")
+    body = mdown(body)
+    body = body.replace("\n", "")
     blog = Blog.query.filter(Blog.id==blog_id).first()
     blog.title = title
     blog.body = body
@@ -235,6 +247,9 @@ def editblog():
 def createreview():
     title = request.form.get("title")
     body = request.form.get("body")
+    body = request.form.get("body")
+    body = mdown(body)
+    body = body.replace("\n", "")
     url = request.form.get("url")
     repo = request.form.get("repo")
     review = Review(title=title, body=body, url=url, repo=repo,
@@ -249,6 +264,9 @@ def editreview():
     review_id = request.form.get("id")
     title = request.form.get("title")
     body = request.form.get("body")
+    body = request.form.get("body")
+    body = mdown(body)
+    body = body.replace("\n", "")
     url = request.form.get("url")
     repo = request.form.get("repo")
     review = Review.query.filter(Review.id==review_id).first()
@@ -270,6 +288,8 @@ def createmusic():
         trackno = request.form.get("trackno" + str(i))
         sc_api = request.form.get("sc_api" + str(i))
         descript = request.form.get("descript" + str(i))
+        descript = mdown(descript)
+        descript = descript.replace("\n", "")
         music = Music(artist=artist, album=album, song=song,trackno=trackno,
                 sc_api=sc_api, descript=descript)
         db.session.add(music)
@@ -286,6 +306,8 @@ def editmusic():
     trackno = request.form.get("trackno0")
     sc_api = request.form.get("sc_api0")
     descript = request.form.get("descript0")
+    descript = mdown(descript)
+    descript = descript.replace("\n", "")
     music = Music.query.filter(Music.id==music_id).first()
     music.artist = artist
     music.album = album
