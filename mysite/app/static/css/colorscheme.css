@@ -228,3 +228,15 @@
   border-width: 1px;
   border-radius: 5px;
 }
+.markup-container > p {
+  color: var(--lighter);
+}
+.markup-container > a {
+  color: var(--lightest);
+}
+.markup-container > a:hover {
+  color: var(--dark);
+}
+.markup-container > blockquote {
+  color: var(--light);
+}
