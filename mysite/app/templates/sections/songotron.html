@@ -14,4 +14,7 @@
   {% endfor %}
   </ul>
   <div id="track-container"></div>
+  {% for song in songs %}
+  <div class="markup-container" id="descript-container-{{ loop.index }}" style="display: none;">{{ song.descript|safe }}</div>
+  {% endfor %}
 </div>
