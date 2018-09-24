@@ -1,4 +1,5 @@
 $(document).ready(function fillOnReady() {
+  var tdown = new TurndownService();
   // assign all project-edit fields to variable
   var $projectFields = $('.project-edit');
   // assign all blog-edit fields to variable
@@ -29,7 +30,12 @@ $(document).ready(function fillOnReady() {
     // for each field in each field category
     $(category).each(function eachField(j, field) {
       // populate field with the first post in the corresponding category
-      $(field).val($content[i][0][j]);
+      var content = $content[i][0][j]
+      if ($(field).is('textarea')) {
+        content = tdown.turndown(content);
+        content = tdown.turndown(content);
+      };
+      $(field).val(content);
     });
   });
 
@@ -46,7 +52,12 @@ $(document).ready(function fillOnReady() {
         // populate the field with the content within
         // the corresponding category beginning at index of
         // this each index + 1
-        $(field).val($content[i][index][j]);
+        var content = $content[i][index][j];
+        if ($(field).is('textarea')) {
+          content = tdown.turndown(content);
+          content = tdown.turndown(content);
+        };
+        $(field).val(content);
       });
     });
   });
