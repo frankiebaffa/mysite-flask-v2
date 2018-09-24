@@ -17,9 +17,11 @@
       {{ review.timestamp|datetime('full') }}
     </h3>
     <p class="jumbotron-p fg-lighter p-title text-center">{{ review.title }}</p>
-    <p class="jumbotron-p fg-light">{{ review.body|string|truncate(280) }}</p>
-    <a class="read-more fg-lightest hover-fg-light tran-fast"
-              href="{{ url_for('reviewpost', post=review.id) }}">Read more</a>
+    <p class="jumbotron-p fg-light">
+      {{ review.body|markstrip|truncate(280) }}
+      <a class="read-more fg-lightest hover-fg-light tran-fast"
+                href="{{ url_for('reviewpost', post=review.id) }}">Read more</a>
+    </p>
   </div>
   {% endfor %}
 </div>
@@ -31,7 +33,7 @@
     <h3 class="jumbotron-sub-title fg-lighter text-center">
       {{ review.timestamp|datetime('full') }}
     </h3>
-    <p class="jumbotron-p fg-light">{{ review.body|string }}</p>
+    <div class="markup-container">{{ review.body|safe }}</div>
     <a class="read-more fg-lightest hover-fg-light tran-fast"
               href="{{ back|string }}">Back to reviews...</a>
   </div>
@@ -45,7 +47,7 @@
     <h3 class="jumbotron-sub-title fg-lighter text-center">
       {{ review.timestamp|datetime('full') }}
     </h3>
-    <p class="jumbotron-p fg-light">{{ review.body|string|truncate(280) }}</p>
+    <p class="jumbotron-p fg-light">{{ review.body|markstrip|truncate(280) }}</p>
     <a class="read-more fg-lightest hover-fg-light tran-fast"
               href="{{ url_for('reviewpost', post=review.id) }}">Read more</a>
   </div>
