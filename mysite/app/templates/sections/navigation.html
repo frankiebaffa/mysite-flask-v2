@@ -68,6 +68,7 @@
         {% elif title == 'Reviews' %}
         {{ dynamicdrop("Review List", "#", "#review-container-", reviews) }}
         {% endif %}
+        {{ navitem(url_for('typing'), "Typing Test") }}
         {# navitem(url_for('about'), "About") #}
         {{ navitem(url_for('contact'), "Contact") }}
         {% if not current_user.is_anonymous %}
