@@ -1,0 +1,37 @@
+<div class="jumbotron bg-darker tilt-border-darkest">
+  <h1 class="main-header jumbotron-title fg-lightest text-center">Typing Test</h1>
+  <div class="stat-container container-fluid bg-darker">
+    <div class="row">
+      <div class="col">
+        <p class="type-stat stat-head fg-lighter">Time</p>
+        <p class="type-stat fg-lighter" id="timer"></p>
+      </div>
+      <div class="col">
+        <p class="type-stat stat-head fg-lighter">WPM</p>
+        <p class="type-stat fg-lighter" id="wpm"></p>
+      </div>
+{#    <div class="col">
+        <p class="type-stat stat-head fg-lighter">Errors</p>
+        <p class="type-stat fg-lighter" id="errors"></p>
+      </div>#}
+    </div>
+  </div>
+  <div class="to-type-container" id="typing-container">
+    <p class="to-type" id="phrase">
+     <p class="to-type-delim">
+        {% for char in typing.body %}
+        {% if char != ' ' %}
+        <span class="typespan" id="typing-{{ loop.index }}">{{ char }}</span>
+        {% else %}
+        <span class="typespan" id="typing-{{ loop.index }}">{{ char }}</span>
+      </p>
+      <p class="to-type-delim">
+        {% endif %}
+        {% endfor %}
+      </p>
+    </p>
+    <div class="typing-container" id="typing-container">
+      <textarea class="typed-phrase bg-darker fg-light" id="typing" placeholder="Start typing..."></textarea>
+    </div>
+  </div>
+</div>
