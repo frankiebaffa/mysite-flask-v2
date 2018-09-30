@@ -1,20 +1,25 @@
 # import application initialization
 from app import app, db
 # render_template for using Jinja2 templates
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, jsonify
 # get flask_login modules current_user and login_user
 # also get flask_login module login_required to make sure
 #   that login is validated before specific pages are accessed
 from flask_login import current_user, login_user, login_required
 from flask_login import logout_user
 # from models import User for login query
-from app.models import User, Blog, Project, Review, Music
+from app.models import User, Blog, Project, Review, Music, Typing, Access
+from app.models import Access_Time
 # get forms from app/forms.py
 from app.forms import LoginForm, ContactForm, ContentForm, MusicForm
 # get flask_mail for contact form
 from flask_mail import Message, Mail
 from sqlalchemy import func
 import markdown2
+import random
+import re
+import json
+import urllib
 # feedparser for handling .rss feeds
 import feedparser
 
@@ -24,6 +29,7 @@ import feedparser
 # define function 'index'
 def index():
     title = "Home"
+    IPStore(title)
     footer = "FrankieBaffa.com was made using the Flask Micro-Framework for Python"
     projects = Project.query.order_by(Project.id.desc()).limit(5).all()
     blog = Blog.query.order_by(Blog.id.desc()).limit(5).all()
@@ -36,6 +42,7 @@ def index():
 def blogpost(post):
     blog = Blog.query.filter(Blog.id == post).first()
     title = blog.title
+    IPStore(title)
     footer = ContentPostFooter()
     pagetype = "single"
     back = url_for('blog') + '#blog-container-' + str(post)
@@ -45,6 +52,7 @@ def blogpost(post):
 @app.route('/blog')
 def blog():
     title = "Blogs"
+    IPStore(title)
     footer = ContentFooter()
     blog = Blog.query.order_by(Blog.id.desc()).all()
     pagetype = "all"
@@ -56,6 +64,7 @@ def projectpost(post):
     pagetype = "single"
     project = Project.query.filter(Project.id == post).first()
     title = project.title
+    IPStore(title)
     footer = ContentPostFooter()
     back = url_for('projects') + '#project-container-' + str(post)
     return render_template("pages/projects.html", title=title, footer=footer,
@@ -64,6 +73,7 @@ def projectpost(post):
 @app.route('/projects')
 def projects():
     title = "Projects"
+    IPStore(title)
     footer = ContentFooter()
     projects = Project.query.order_by(Project.id.desc()).all()
     pagetype = "all"
@@ -73,6 +83,7 @@ def projects():
 @app.route('/reviews')
 def reviews():
     title = "Reviews"
+    IPStore(title)
     footer = ContentFooter()
     reviews = Review.query.order_by(Review.id.desc()).all()
     pagetype = "all"
@@ -84,6 +95,7 @@ def reviewpost(post):
     pagetype = "single"
     review = Review.query.filter(Review.id == post).first()
     title = review.title
+    IPStore(title)
     footer = ContentPostFooter()
     back = url_for('reviews') + '#review-container-' + str(post)
     return render_template("pages/reviews.html", title=title, footer=footer,
@@ -105,6 +117,7 @@ def reviewpost(post):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     title = "Login"
+    IPStore(title)
     footer = "This unlinked page is the login form, used to access the CMS."
     form = LoginForm()
     if current_user.is_authenticated:
@@ -124,6 +137,7 @@ def login():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     title = "Contact"
+    IPStore(title)
     footer = "Forms are created using WTForms combined with Bootstrap 4 classes."
     mail = Mail()
     form = ContactForm()
@@ -146,13 +160,47 @@ def contact():
         return render_template('pages/contact.html', title=title, footer=footer,
                 form=form)
 
+#@app.route('/music/<artist>')
+#def artist(artist):
+#    title = "Music"
+#    pagetype = "Artist"
+#    songs = Music.query.filter(func.lower(func.replace(Music.artist, ' ', '')) == func.lower(func.replace(artist, '-', ''))).order_by(Music.trackno.asc()).all()
+#    albumsarray = Music.query.distinct(Music.album).group_by(Music.album).filter(func.lower(func.replace(Music.artist, ' ', '')) == func.lower(func.replace(artist, '-', '')).order_by(Music.album.desc())).all()
+#    albums = []
+#    songarray = []
+#    for album in albumsarray:
+#        albums.append(album.album)
+#    for i in range(len(albums)):
+#        for song in songs:
+#            album = []
+#            if song.album == albums[i]:
+#                album.append(song)
+#        songarray.append(album)
+#    header = (songs[0].artist).replace('-', ' ')
+#    return render_template('pages/music.html', title=title, songs=songs, album.album, header=header, pagetype=pagetype)
+
 @app.route('/music/<artist>/<album>')
 def music(artist, album):
     title = "Music"
+    IPStore(title)
+    pagetype = "Album"
     songs = Music.query.filter(func.lower(func.replace(Music.artist, ' ', '')) == func.lower(func.replace(artist, '-', ''))).filter(func.lower(func.replace(Music.album, ' ', '')) == func.lower(func.replace(album, '-', ''))).order_by(Music.trackno.asc()).all()
     header = (songs[0].artist).replace('-', ' ')
     album = (songs[0].album).replace('-', ' ')
-    return render_template('pages/music.html', title=title, songs=songs, header=header, album=album)
+    return render_template('pages/music.html', title=title, songs=songs, header=header, album=album, pagetype=pagetype)
+
+@app.route('/typing')
+def typing():
+    title = "Typing Test"
+    IPStore(title)
+    alltyping = Typing.query.all()
+    integerarray = []
+    for typing in alltyping:
+        integerarray.append(typing.id)
+    maxid = max(integerarray)
+    randomint = random.randint(1, maxid)
+    typing = Typing.query.filter(Typing.id == randomint).first()
+    return render_template('pages/typing.html', title=title, typing=typing)
 
 #=======================================#
 #       All below methods must          #
@@ -164,7 +212,8 @@ def music(artist, album):
 @app.route('/manage')
 @login_required
 def manage():
-    title = "Manage Content"
+    title = "Manage"
+    IPStore(title)
     footer = "These forms are used to create new objects within the SQLite3 database and to edit existing objects."
     projects = Project.query.all()
     blogs = Blog.query.all()
@@ -184,6 +233,7 @@ mdown = markdown2.markdown
 @login_required
 def createproject():
     title = request.form.get("title")
+    IPStore("Manage: "+title)
     body = request.form.get("body")
     body = mdown(body)
     body = body.replace("\n", "")
@@ -200,6 +250,7 @@ def createproject():
 def editproject():
     project_id = request.form.get("id")
     title = request.form.get("title")
+    IPStore("Manage: "+title)
     body = request.form.get("body")
     body = request.form.get("body")
     body = mdown(body)
@@ -219,6 +270,7 @@ def editproject():
 @login_required
 def createblog():
     title = request.form.get("title")
+    IPStore("Manage: "+title)
     body = request.form.get("body")
     body = mdown(body)
     body = body.replace("\n", "")
@@ -232,6 +284,7 @@ def createblog():
 def editblog():
     blog_id = request.form.get("id")
     title = request.form.get("title")
+    IPStore("Manage: "+title)
     body = request.form.get("body")
     body = mdown(body)
     body = body.replace("\n", "")
@@ -246,6 +299,7 @@ def editblog():
 @login_required
 def createreview():
     title = request.form.get("title")
+    IPStore("Manage: "+title)
     body = request.form.get("body")
     body = request.form.get("body")
     body = mdown(body)
@@ -263,6 +317,7 @@ def createreview():
 def editreview():
     review_id = request.form.get("id")
     title = request.form.get("title")
+    IPStore("Manage: "+title)
     body = request.form.get("body")
     body = request.form.get("body")
     body = mdown(body)
@@ -281,6 +336,7 @@ def editreview():
 @app.route('/manage/createmusic', methods=['POST'])
 @login_required
 def createmusic():
+    IPStore("Manage: Music Create Attempt")
     for i in range(int(request.form.get("song-add-counter")) + 1):
         artist = request.form.get("artist")
         album = request.form.get("album")
@@ -303,6 +359,7 @@ def editmusic():
     artist = request.form.get("artist")
     album = request.form.get("album")
     song = request.form.get("song0")
+    IPStore("Manage: "+song)
     trackno = request.form.get("trackno0")
     sc_api = request.form.get("sc_api0")
     descript = request.form.get("descript0")
@@ -324,6 +381,8 @@ def editmusic():
 @app.route('/logout')
 @login_required
 def logout():
+    title = "Logout"
+    IPStore(title)
     logout_user()
     return redirect(url_for('index'))
 
@@ -356,3 +415,23 @@ def ContentFooter():
 def ContentPostFooter():
     footer = "Individual content post pages are passed into a dynamic route in view which fills the reusable template."
     return footer
+
+def IPStore(title):
+    url = 'http://ipinfo.io/json'
+    response = urllib.request.urlopen(url)
+    data = json.load(response)
+    ip = data['ip']
+    org = data['org']
+    city = data['city']
+    country = data['country']
+    region = data['region']
+    a = Access.query.filter(Access.ip == ip).first()
+    if not a:
+        a = Access(ip=ip,
+                   org=org,
+                   loc="{}, {}, {}".format(city, region, country))
+    db.session.add(a)
+    db.session.commit()
+    t = Access_Time(ip_id=a.id, page=title)
+    db.session.add(t)
+    db.session.commit()
