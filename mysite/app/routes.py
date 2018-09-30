@@ -439,7 +439,7 @@ def ContentPostFooter():
     return footer
 
 def IPStore(title):
-    ip = request.environ['REMOTE_ADDR']
+    ip = request.environ['HTTP_X_REAL_IP']
     url = 'http://ipinfo.io/'+ip+'/json'
     response = urllib.request.urlopen(url)
     data = json.load(response)
