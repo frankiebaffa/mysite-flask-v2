@@ -4,7 +4,9 @@
     <li class="page-item jumbotron-item">
       <a class="page-link jumbotron-link blog-link bg-darker
                 fg-lighter hover-bg-lighter hover-fg-darker
-                tran-fast create-button review-button" id="createReviewButton">Create</a>
+                tran-fast create-button review-button" id="createReviewButton">
+        Create
+      </a>
     </li>
     <li class="page-item jumbotron-item">
       <a class="page-link jumbotron-link blog-link bg-darker
@@ -12,7 +14,6 @@
                 tran-fast edit-button review-button" id="editReviewButton">Edit</a>
     </li>
   </ul>
-  <p>{{ user }}</p>
   <form class="manage-form create-form review-form" action="{{ url_for('createreview') }}" method="post" id="createReviewForm">
     {{ form.hidden_tag() }}
     <div class="form-group">
