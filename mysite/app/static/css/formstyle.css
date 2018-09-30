@@ -1,7 +1,7 @@
 .form-container {
   max-width: 800px;
   width: 90%;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 20px auto;
   padding: 10;
 }
 
@@ -12,15 +12,22 @@
 .manage-submit {
   margin: 10px auto 0 auto;
 }
-
-.project-form-container,
-.blog-form-container {
-  margin: 0 auto 20px auto;
-}
-
 .manage-textareafield {
   height: 200px !important;
 }
 .bottom-form {
   margin-bottom: 10px;
+}
+.dl-btn {
+  display: block;
+  height: 40px;
+  width: 200px;
+  margin: 0px auto;
+}
+.dl-link,
+.dl-btn {
+	height: 40px;
+  width: 200px;
+  display: block;
+  margin: 0px auto;
 }
