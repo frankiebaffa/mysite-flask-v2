@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # import application initialization
 from app import app, db
 # render_template for using Jinja2 templates
@@ -21,6 +23,9 @@ import random
 import re
 import json
 import urllib
+
+import sys
+
 # feedparser for handling .rss feeds
 import feedparser
 
@@ -30,12 +35,12 @@ import feedparser
 # define function 'index'
 def index():
     title = "Home"
-    IPStore(title)
     footer = "FrankieBaffa.com was made using the Flask Micro-Framework for Python"
     projects = Project.query.order_by(Project.id.desc()).limit(5).all()
     blog = Blog.query.order_by(Blog.id.desc()).limit(5).all()
     reviews = Review.query.order_by(Review.id.desc()).limit(5).all()
     pagetype = "top"
+    IPStore(title)
     return render_template('pages/index.html', projects=projects, title=title,
             blog=blog, reviews=reviews, pagetype=pagetype, footer=footer)
 
@@ -434,21 +439,25 @@ def ContentPostFooter():
     return footer
 
 def IPStore(title):
-    url = 'http://ipinfo.io/json'
+    ip = request.remote_addr
+    url = 'http://ipinfo.io/'+ip+'/json'
     response = urllib.request.urlopen(url)
     data = json.load(response)
-    ip = data['ip']
-    org = data['org']
-    city = data['city']
-    country = data['country']
-    region = data['region']
-    a = Access.query.filter(Access.ip == ip).first()
-    if not a:
-        a = Access(ip=ip,
-                   org=org,
-                   loc="{}, {}, {}".format(city, region, country))
-    db.session.add(a)
-    db.session.commit()
-    t = Access_Time(ip_id=a.id, page=title)
-    db.session.add(t)
-    db.session.commit()
+    bogon = ""
+    if data['bogon']:
+        return
+    elif not data['bogon']:
+        org = data['org']
+        city = data['city']
+        country = data['country']
+        region = data['region']
+        a = Access.query.filter(Access.ip == ip).first()
+        if not a:
+            a = Access(ip=ip,
+                       org=org,
+                       loc="{}, {}, {}".format(city, region, country))
+            db.session.add(a)
+            db.session.commit()
+        t = Access_Time(ip_id=a.id, page=title)
+        db.session.add(t)
+        db.session.commit()
