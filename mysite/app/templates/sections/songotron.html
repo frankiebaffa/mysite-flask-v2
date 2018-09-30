@@ -3,6 +3,19 @@
     {{ album }}
   </h1>
   <p class="p-title fg-lightest text-center">{{ header }}</p>
+  {% if pagetype == "Album" %}
+  <ul class="pagination">
+  {% for song in songs %}
+    <li class="page-item jumbotron-item blog-item">
+      <a class="page-link jumbotron-link track-link bg-darker
+                fg-lighter hover-bg-lighter hover-fg-darker
+                tran-fast"
+                id="song{{ song.id }}">{{ loop.index }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  {% if pagetype == "Artist" %}
   <ul class="pagination">
   {% for song in songs %}
     <li class="page-item jumbotron-item blog-item">
