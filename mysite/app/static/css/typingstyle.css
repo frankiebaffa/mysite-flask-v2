@@ -1,0 +1,32 @@
+.typed-phrase {
+  width: 95%;
+  height: 150px;
+  font-family: 'Apercu';
+}
+.to-type-delim {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+.typespan {
+  font-family: 'Apercu';
+  color: var(--lighter);
+  display: inline-block;
+  width: 7px !important;
+  margin-top: -2px;
+  height: 20px;
+}
+.to-type {
+  color: var(--lighter);
+  display: inline;
+  overflow-wrap: break-word;
+}
+.stat-container {
+  width: 95%;
+  margin: 0px auto;
+}
+.type-stat {
+  text-align: center;
+}
+.stat-head {
+  margin-bottom: -5px;
+}
