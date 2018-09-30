@@ -139,8 +139,10 @@ class Access(db.Model):
     __tablename__ = "accesses"
     id = db.Column(db.Integer, primary_key=True)
     ip = db.Column(db.String(15))
+    host = db.Column(db.String(200))
     org = db.Column(db.String(200))
     loc = db.Column(db.String(200))
+    coor = db.Column(db.String(200))
 
     def __repr__(self):
         return '<IP {}>'.format(self.ip)
