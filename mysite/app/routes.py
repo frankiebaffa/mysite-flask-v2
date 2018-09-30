@@ -443,10 +443,18 @@ def IPStore(title):
     url = 'http://ipinfo.io/'+ip+'/json'
     response = urllib.request.urlopen(url)
     data = json.load(response)
-    bogon = ""
-    if data['bogon']:
-        return
-    elif not data['bogon']:
+    try:
+        if data["bogon"]:
+            ip = ip
+            a = Access.query.filter(Access.ip == ip).first()
+            if not a:
+                a = Access(ip=ip)
+                db.session.add(a)
+                db.session.commit()
+            t = Access_Time(ip_id=a.id, page=title)
+            db.session.add(t)
+            db.session.commit()
+    except KeyError:
         org = data['org']
         city = data['city']
         country = data['country']
