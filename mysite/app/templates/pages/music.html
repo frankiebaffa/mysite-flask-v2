@@ -22,5 +22,10 @@
 
 {% block script %}
 {{ super() }}
+{% if pagetype == "Album" %}
 {% include 'js/songotronArray.html' %}
+{% endif %}
+{% if pagetype == "Artist" %}
+{% include 'js/songotronArrayArtist.html' %}
+{% endif %}
 {% endblock script %}
