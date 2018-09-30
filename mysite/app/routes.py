@@ -385,12 +385,15 @@ def editmusic():
 @app.route('/manage/logdl.txt', methods=['GET', 'POST'])
 @login_required
 def iplog():
-    logs = db.session.query(Access.ip, Access.loc, Access_Time.timestamp,
-            Access_Time.page).join(Access_Time).order_by(Access_Time.timestamp.desc()).all()
+    logs = db.session.query(Access.ip, Access.org, Access.host,
+            Access.loc, Access_Time.timestamp,
+            Access_Time.page).join(Access_Time).\
+                    order_by(Access_Time.timestamp.desc()).all()
     def generate():
         for log in logs:
             for attrib in log:
-                yield '{}\n'.format(attrib)
+                if attrib is not None:
+                    yield '{}\n'.format(attrib)
             yield '\n'
     return Response(generate(),
                     mimetype="text/plain",
@@ -439,33 +442,50 @@ def ContentPostFooter():
     return footer
 
 def IPStore(title):
-    ip = request.environ['HTTP_X_REAL_IP']
+    try:
+        ip = request.environ['HTTP_X_REAL_IP']
+    except KeyError:
+        ip = request.remote_addr
     url = 'http://ipinfo.io/'+ip+'/json'
     response = urllib.request.urlopen(url)
     data = json.load(response)
     try:
-        if data["bogon"]:
-            ip = ip
-            a = Access.query.filter(Access.ip == ip).first()
-            if not a:
-                a = Access(ip=ip)
-                db.session.add(a)
-                db.session.commit()
-            t = Access_Time(ip_id=a.id, page=title)
-            db.session.add(t)
-            db.session.commit()
-    except KeyError:
         org = data['org']
+    except KeyError:
+        org = None
+    try:
         city = data['city']
+    except KeyError:
+        city = None
+    try:
         country = data['country']
+    except KeyError:
+        country = None
+    try:
         region = data['region']
-        a = Access.query.filter(Access.ip == ip).first()
-        if not a:
-            a = Access(ip=ip,
-                       org=org,
-                       loc="{}, {}, {}".format(city, region, country))
-            db.session.add(a)
-            db.session.commit()
-        t = Access_Time(ip_id=a.id, page=title)
-        db.session.add(t)
+    except KeyError:
+        region = None
+    try:
+        postal = data['postal']
+    except KeyError:
+        postal = None
+    try:
+        coor = data['loc']
+    except KeyError:
+        coor = None
+    try:
+        host = data['hostname']
+    except KeyError:
+        host = None
+    a = Access.query.filter(Access.ip == ip).first()
+    if not a:
+        a = Access(ip=ip,
+                   org=org,
+                   loc="{}, {},{}, {}".format(city, region, postal, country),
+                   coor=coor,
+                   host=host)
+        db.session.add(a)
         db.session.commit()
+    t = Access_Time(ip_id=a.id, page=title)
+    db.session.add(t)
+    db.session.commit()
