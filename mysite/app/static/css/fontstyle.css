@@ -42,15 +42,21 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/static/montserrat/Montserrat-Italic.otf");
+  src: url("/static/font/montserrat/Montserrat-Italic.otf");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: "Montserrat";
-  src: url("/static/montserrat/Montserrat-BoldItalic.otf");
+  src: url("/static/font/montserrat/Montserrat-BoldItalic.otf");
   font-weight: bold;
   font-style: italic;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/static/font/ApercuMono.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 h1, h2, h3,
 h4, h5, h6 {
