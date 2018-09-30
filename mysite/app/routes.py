@@ -2,6 +2,7 @@
 from app import app, db
 # render_template for using Jinja2 templates
 from flask import render_template, flash, redirect, url_for, request, jsonify
+from flask import Response
 # get flask_login modules current_user and login_user
 # also get flask_login module login_required to make sure
 #   that login is validated before specific pages are accessed
@@ -375,6 +376,22 @@ def editmusic():
     db.session.add(music)
     db.session.commit()
     return redirect(url_for('manage'))
+
+@app.route('/manage/logdl.txt', methods=['GET', 'POST'])
+@login_required
+def iplog():
+    logs = db.session.query(Access.ip, Access.loc, Access_Time.timestamp,
+            Access_Time.page).join(Access_Time).order_by(Access_Time.timestamp.desc()).all()
+    def generate():
+        for log in logs:
+            for attrib in log:
+                yield '{}\n'.format(attrib)
+            yield '\n'
+    return Response(generate(),
+                    mimetype="text/plain",
+                    headers={"Content-disposition":
+                             "attachment;filename=iplog.txt"})
+    
 
 # create route to logout method
 # only allow if user is logged in
