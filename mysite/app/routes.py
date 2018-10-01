@@ -23,6 +23,7 @@ import random
 import re
 import json
 import urllib
+import pytz
 
 import sys
 
@@ -385,15 +386,23 @@ def editmusic():
 @app.route('/manage/logdl.txt', methods=['GET', 'POST'])
 @login_required
 def iplog():
+    est = pytz.timezone('US/Eastern')
+    fmt = '%Y-%m-%d %H:%M:%S %Z%z'
     logs = db.session.query(Access.ip, Access.org, Access.host,
             Access.loc, Access_Time.timestamp,
             Access_Time.page).join(Access_Time).\
                     order_by(Access_Time.timestamp.desc()).all()
     def generate():
         for log in logs:
+            counter = 0
             for attrib in log:
-                if attrib is not None:
-                    yield '{}\n'.format(attrib)
+                counter = counter+1
+                if counter == 5:
+                    if attrib is not None:
+                        yield '{}\n'.format(attrib.astimezone(est).strftime(fmt))
+                else:
+                    if attrib is not None:
+                        yield '{}\n'.format(attrib)
             yield '\n'
     return Response(generate(),
                     mimetype="text/plain",
