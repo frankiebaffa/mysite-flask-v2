@@ -124,7 +124,7 @@ class Music(db.Model):
     user = relationship(User, primaryjoin=user_id == User.id)
 
     def __repr__(self):
-        return '<{}|{}|{}'.format(self.artist, self.album, self.song)
+        return '<{}|{}|{}>'.format(self.artist, self.album, self.song)
 
 class Typing(db.Model):
     __tablename__ = "typing"
