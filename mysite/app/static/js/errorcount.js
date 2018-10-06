@@ -1,9 +1,9 @@
-var phrase = [];
-var checkindex = 0;
-var errors = 0;
-var typing = "";
-var accuracy = 100;
 $(document).ready(function() {
+  var phrase = [];
+  var checkindex = 0;
+  var errors = 0;
+  var typing = "";
+  var accuracy = 100;
   $('#errors').text(errors);
   $('#accuracy').text(accuracy+'%');
   $('#typing').on('input propertychange', function() {
